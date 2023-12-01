@@ -27,9 +27,29 @@ public:
 
 private slots:
     void onBrowseButtonClicked() {
+        try
+        {
+            timer->stop();
+            cameraHandler.stopAcquisition();
+        }
+        catch(const std::exception& e)
+        {
+            QMessageBox::critical(this, "Error", e.what());
+        }
+        
         QString directory = QFileDialog::getExistingDirectory(this, "Select Directory");
         if (!directory.isEmpty()) {
             pathLineEdit->setText(directory);
+        }
+
+        try
+        {
+            timer->start(1000 / cameraHandler.getFrameRate());
+            cameraHandler.startAcquisition();
+        }
+        catch(const std::exception& e)
+        {
+            QMessageBox::critical(this, "Error", e.what());
         }
     }
 

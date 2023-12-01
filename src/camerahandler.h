@@ -17,10 +17,13 @@ public:
         pCam = camList.GetByIndex(0);
         pCam->Init();
         pCam->BeginAcquisition();
+        pCam->EndAcquisition();
+        pCam->BeginAcquisition();
     }
 
     ~CameraHandler() {
         pCam->EndAcquisition();
+        pCam = nullptr;
         camList.Clear();
         system->ReleaseInstance();
     }
@@ -57,6 +60,14 @@ public:
     void saveImage(const QImage& image, const QString& directory, int& imageCount) {
         QString filename = QString("%1/%2.bmp").arg(directory).arg(imageCount++, 6, 10, QLatin1Char('0'));
         image.save(filename);
+    }
+
+    void stopAcquisition() {
+        pCam->EndAcquisition();
+    }
+
+    void startAcquisition() {
+        pCam->BeginAcquisition();
     }
 
 private:
