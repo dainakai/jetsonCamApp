@@ -18,6 +18,7 @@ git clone https://github.com/dainakai/jetsonCamApp.git
 
 ```
 cd path/to/jetsonCamApp
+sh ./Allclean.sh
 qmake
 make
 ```
