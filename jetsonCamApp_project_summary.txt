@@ -1,0 +1,2677 @@
+# jetsonCamApp
+
+## Directory Structure
+
+- jetsonCamApp/
+  - moc/
+    - moc_appwindow.cpp
+    - moc_predefs.h
+  - .vscode/
+  - Allclean.sh
+  - obj/
+    - cuda_functions.o (binary file)
+    - moc_appwindow.o (binary file)
+    - main.o (binary file)
+    - libcuda_functions.a (binary file)
+  - build.pro
+  - CUDAbuild.sh
+  - .qmake.stash
+  - Makefile
+  - src/
+    - main.cpp
+    - cuda_functions.h
+    - camerahandler.h
+    - cuda_functions.cu
+    - appwindow.h
+  - README.md
+
+## File Contents
+
+### moc/moc_appwindow.cpp
+
+```
+/****************************************************************************
+** Meta object code from reading C++ file 'appwindow.h'
+**
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.2)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include <memory>
+#include "../src/appwindow.h"
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'appwindow.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.15.2. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_DEPRECATED
+struct qt_meta_stringdata_AppWindow_t {
+    QByteArrayData data[6];
+    char stringdata0[75];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_AppWindow_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_AppWindow_t qt_meta_stringdata_AppWindow = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "AppWindow"
+QT_MOC_LITERAL(1, 10, 21), // "onBrowseButtonClicked"
+QT_MOC_LITERAL(2, 32, 0), // ""
+QT_MOC_LITERAL(3, 33, 21), // "onRecordButtonToggled"
+QT_MOC_LITERAL(4, 55, 7), // "checked"
+QT_MOC_LITERAL(5, 63, 11) // "updateImage"
+
+    },
+    "AppWindow\0onBrowseButtonClicked\0\0"
+    "onRecordButtonToggled\0checked\0updateImage"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_AppWindow[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       3,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   29,    2, 0x08 /* Private */,
+       3,    1,   30,    2, 0x08 /* Private */,
+       5,    0,   33,    2, 0x08 /* Private */,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,    4,
+    QMetaType::Void,
+
+       0        // eod
+};
+
+void AppWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        auto *_t = static_cast<AppWindow *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->onBrowseButtonClicked(); break;
+        case 1: _t->onRecordButtonToggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 2: _t->updateImage(); break;
+        default: ;
+        }
+    }
+}
+
+QT_INIT_METAOBJECT const QMetaObject AppWindow::staticMetaObject = { {
+    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
+    qt_meta_stringdata_AppWindow.data,
+    qt_meta_data_AppWindow,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *AppWindow::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *AppWindow::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_AppWindow.stringdata0))
+        return static_cast<void*>(this);
+    return QWidget::qt_metacast(_clname);
+}
+
+int AppWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 3)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 3;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 3)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 3;
+    }
+    return _id;
+}
+QT_WARNING_POP
+QT_END_MOC_NAMESPACE
+
+```
+
+### moc/moc_predefs.h
+
+```
+#define __SSP_STRONG__ 3
+#define __DBL_MIN_EXP__ (-1021)
+#define __cpp_attributes 200809L
+#define __cpp_nontype_template_parameter_auto 201606L
+#define __UINT_LEAST16_MAX__ 0xffff
+#define __ATOMIC_ACQUIRE 2
+#define __FLT128_MAX_10_EXP__ 4932
+#define __FLT_MIN__ 1.17549435082228750796873653722224568e-38F
+#define __GCC_IEC_559_COMPLEX 2
+#define __cpp_aggregate_nsdmi 201304L
+#define __UINT_LEAST8_TYPE__ unsigned char
+#define __SIZEOF_FLOAT80__ 16
+#define __INTMAX_C(c) c ## L
+#define __CHAR_BIT__ 8
+#define __UINT8_MAX__ 0xff
+#define __SCHAR_WIDTH__ 8
+#define __WINT_MAX__ 0xffffffffU
+#define __FLT32_MIN_EXP__ (-125)
+#define __cpp_static_assert 201411L
+#define __ORDER_LITTLE_ENDIAN__ 1234
+#define __SIZE_MAX__ 0xffffffffffffffffUL
+#define __WCHAR_MAX__ 0x7fffffff
+#define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 1
+#define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 1
+#define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 1
+#define __DBL_DENORM_MIN__ double(4.94065645841246544176568792868221372e-324L)
+#define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 1
+#define __GCC_ATOMIC_CHAR_LOCK_FREE 2
+#define __GCC_IEC_559 2
+#define __FLT32X_DECIMAL_DIG__ 17
+#define __FLT_EVAL_METHOD__ 0
+#define __cpp_binary_literals 201304L
+#define __FLT64_DECIMAL_DIG__ 17
+#define __CET__ 3
+#define __cpp_noexcept_function_type 201510L
+#define __GCC_ATOMIC_CHAR32_T_LOCK_FREE 2
+#define __cpp_variadic_templates 200704L
+#define __UINT_FAST64_MAX__ 0xffffffffffffffffUL
+#define __SIG_ATOMIC_TYPE__ int
+#define __DBL_MIN_10_EXP__ (-307)
+#define __FINITE_MATH_ONLY__ 0
+#define __cpp_variable_templates 201304L
+#define __FLT32X_MAX_EXP__ 1024
+#define __FLT32_HAS_DENORM__ 1
+#define __UINT_FAST8_MAX__ 0xff
+#define __cpp_rvalue_reference 200610L
+#define __cpp_nested_namespace_definitions 201411L
+#define __DEC64_MAX_EXP__ 385
+#define __INT8_C(c) c
+#define __INT_LEAST8_WIDTH__ 8
+#define __cpp_variadic_using 201611L
+#define __UINT_LEAST64_MAX__ 0xffffffffffffffffUL
+#define __INT_LEAST8_MAX__ 0x7f
+#define __cpp_capture_star_this 201603L
+#define __SHRT_MAX__ 0x7fff
+#define __LDBL_MAX__ 1.18973149535723176502126385303097021e+4932L
+#define __FLT64X_MAX_10_EXP__ 4932
+#define __cpp_if_constexpr 201606L
+#define __LDBL_IS_IEC_60559__ 2
+#define __FLT64X_HAS_QUIET_NAN__ 1
+#define __UINT_LEAST8_MAX__ 0xff
+#define __GCC_ATOMIC_BOOL_LOCK_FREE 2
+#define __FLT128_DENORM_MIN__ 6.47517511943802511092443895822764655e-4966F128
+#define __UINTMAX_TYPE__ long unsigned int
+#define __linux 1
+#define __DEC32_EPSILON__ 1E-6DF
+#define __FLT_EVAL_METHOD_TS_18661_3__ 0
+#define __OPTIMIZE__ 1
+#define __unix 1
+#define __UINT32_MAX__ 0xffffffffU
+#define __GXX_EXPERIMENTAL_CXX0X__ 1
+#define __FLT128_MIN_EXP__ (-16381)
+#define __WINT_MIN__ 0U
+#define __FLT128_MIN_10_EXP__ (-4931)
+#define __FLT32X_IS_IEC_60559__ 2
+#define __INT_LEAST16_WIDTH__ 16
+#define __SCHAR_MAX__ 0x7f
+#define __FLT128_MANT_DIG__ 113
+#define __WCHAR_MIN__ (-__WCHAR_MAX__ - 1)
+#define __INT64_C(c) c ## L
+#define __GCC_ATOMIC_POINTER_LOCK_FREE 2
+#define _FORTIFY_SOURCE 2
+#define __FLT32X_MANT_DIG__ 53
+#define __GCC_ATOMIC_CHAR16_T_LOCK_FREE 2
+#define __cpp_aligned_new 201606L
+#define __USER_LABEL_PREFIX__ 
+#define __FLT32_MAX_10_EXP__ 38
+#define __FLT64X_EPSILON__ 1.08420217248550443400745280086994171e-19F64x
+#define __STDC_HOSTED__ 1
+#define __DEC64_MIN_EXP__ (-382)
+#define __cpp_decltype_auto 201304L
+#define __DBL_DIG__ 15
+#define __FLT32_DIG__ 6
+#define __FLT_EPSILON__ 1.19209289550781250000000000000000000e-7F
+#define __GXX_WEAK__ 1
+#define __SHRT_WIDTH__ 16
+#define __FLT32_IS_IEC_60559__ 2
+#define __LDBL_MIN__ 3.36210314311209350626267781732175260e-4932L
+#define __DBL_IS_IEC_60559__ 2
+#define __DEC32_MAX__ 9.999999E96DF
+#define __cpp_threadsafe_static_init 200806L
+#define __cpp_enumerator_attributes 201411L
+#define __FLT64X_DENORM_MIN__ 3.64519953188247460252840593361941982e-4951F64x
+#define __FLT32X_HAS_INFINITY__ 1
+#define __INT32_MAX__ 0x7fffffff
+#define __unix__ 1
+#define __INT_WIDTH__ 32
+#define __SIZEOF_LONG__ 8
+#define __STDC_IEC_559__ 1
+#define __STDC_ISO_10646__ 201706L
+#define __UINT16_C(c) c
+#define __DECIMAL_DIG__ 21
+#define __STDC_IEC_559_COMPLEX__ 1
+#define __FLT64_EPSILON__ 2.22044604925031308084726333618164062e-16F64
+#define __gnu_linux__ 1
+#define __INT16_MAX__ 0x7fff
+#define __FLT64_MIN_EXP__ (-1021)
+#define __FLT64X_MIN_10_EXP__ (-4931)
+#define __LDBL_HAS_QUIET_NAN__ 1
+#define __FLT64_MANT_DIG__ 53
+#define __FLT64X_MANT_DIG__ 64
+#define __GNUC__ 11
+#define __GXX_RTTI 1
+#define __pie__ 2
+#define __MMX__ 1
+#define __FLT_HAS_DENORM__ 1
+#define __SIZEOF_LONG_DOUBLE__ 16
+#define __BIGGEST_ALIGNMENT__ 16
+#define __STDC_UTF_16__ 1
+#define __FLT64_MAX_10_EXP__ 308
+#define __cpp_delegating_constructors 200604L
+#define __FLT32_HAS_INFINITY__ 1
+#define __DBL_MAX__ double(1.79769313486231570814527423731704357e+308L)
+#define __cpp_raw_strings 200710L
+#define __INT_FAST32_MAX__ 0x7fffffffffffffffL
+#define __DBL_HAS_INFINITY__ 1
+#define __SIZEOF_FLOAT__ 4
+#define __HAVE_SPECULATION_SAFE_VALUE 1
+#define __cpp_fold_expressions 201603L
+#define __DEC32_MIN_EXP__ (-94)
+#define __INTPTR_WIDTH__ 64
+#define __FLT64X_HAS_INFINITY__ 1
+#define __UINT_LEAST32_MAX__ 0xffffffffU
+#define __FLT32X_HAS_DENORM__ 1
+#define __INT_FAST16_TYPE__ long int
+#define __MMX_WITH_SSE__ 1
+#define __LDBL_HAS_DENORM__ 1
+#define __cplusplus 201703L
+#define __cpp_ref_qualifiers 200710L
+#define __DEC32_MIN__ 1E-95DF
+#define __DEPRECATED 1
+#define __cpp_rvalue_references 200610L
+#define __DBL_MAX_EXP__ 1024
+#define __WCHAR_WIDTH__ 32
+#define __FLT32_MAX__ 3.40282346638528859811704183484516925e+38F32
+#define __DEC128_EPSILON__ 1E-33DL
+#define __SSE2_MATH__ 1
+#define __ATOMIC_HLE_RELEASE 131072
+#define __PTRDIFF_MAX__ 0x7fffffffffffffffL
+#define __amd64 1
+#define __ATOMIC_HLE_ACQUIRE 65536
+#define __GNUG__ 11
+#define __LONG_LONG_MAX__ 0x7fffffffffffffffLL
+#define __SIZEOF_SIZE_T__ 8
+#define __cpp_nsdmi 200809L
+#define __FLT64X_MIN_EXP__ (-16381)
+#define __SIZEOF_WINT_T__ 4
+#define __LONG_LONG_WIDTH__ 64
+#define __cpp_initializer_lists 200806L
+#define __FLT32_MAX_EXP__ 128
+#define __cpp_hex_float 201603L
+#define __GXX_ABI_VERSION 1016
+#define __FLT128_HAS_INFINITY__ 1
+#define __FLT_MIN_EXP__ (-125)
+#define __GCC_HAVE_DWARF2_CFI_ASM 1
+#define __x86_64 1
+#define __cpp_lambdas 200907L
+#define __INT_FAST64_TYPE__ long int
+#define __FLT64_DENORM_MIN__ 4.94065645841246544176568792868221372e-324F64
+#define __cpp_template_auto 201606L
+#define __DBL_MIN__ double(2.22507385850720138309023271733240406e-308L)
+#define __FLT128_EPSILON__ 1.92592994438723585305597794258492732e-34F128
+#define __FLT64X_NORM_MAX__ 1.18973149535723176502126385303097021e+4932F64x
+#define __SIZEOF_POINTER__ 8
+#define __LP64__ 1
+#define __DBL_HAS_QUIET_NAN__ 1
+#define __FLT32X_EPSILON__ 2.22044604925031308084726333618164062e-16F32x
+#define __DECIMAL_BID_FORMAT__ 1
+#define __FLT64_MIN_10_EXP__ (-307)
+#define __FLT64X_DECIMAL_DIG__ 21
+#define __DEC128_MIN__ 1E-6143DL
+#define __REGISTER_PREFIX__ 
+#define __UINT16_MAX__ 0xffff
+#define __LDBL_HAS_INFINITY__ 1
+#define __FLT32_MIN__ 1.17549435082228750796873653722224568e-38F32
+#define __UINT8_TYPE__ unsigned char
+#define __FLT_DIG__ 6
+#define __DEC_EVAL_METHOD__ 2
+#define __DEC128_MAX__ 9.999999999999999999999999999999999E6144DL
+#define __FLT_MANT_DIG__ 24
+#define __LDBL_DECIMAL_DIG__ 21
+#define __VERSION__ "11.4.0"
+#define __UINT64_C(c) c ## UL
+#define __cpp_unicode_characters 201411L
+#define _STDC_PREDEF_H 1
+#define __INT_LEAST32_MAX__ 0x7fffffff
+#define __GCC_ATOMIC_INT_LOCK_FREE 2
+#define __FLT128_MAX_EXP__ 16384
+#define __FLT32_MANT_DIG__ 24
+#define __FLOAT_WORD_ORDER__ __ORDER_LITTLE_ENDIAN__
+#define __STDC_IEC_60559_COMPLEX__ 201404L
+#define __cpp_aggregate_bases 201603L
+#define __FLT128_HAS_DENORM__ 1
+#define __FLT32_DECIMAL_DIG__ 9
+#define __FLT128_DIG__ 33
+#define __INT32_C(c) c
+#define __DEC64_EPSILON__ 1E-15DD
+#define __ORDER_PDP_ENDIAN__ 3412
+#define __DEC128_MIN_EXP__ (-6142)
+#define __INT_FAST32_TYPE__ long int
+#define __UINT_LEAST16_TYPE__ short unsigned int
+#define unix 1
+#define __DBL_HAS_DENORM__ 1
+#define __cpp_rtti 199711L
+#define __SIZE_TYPE__ long unsigned int
+#define __UINT64_MAX__ 0xffffffffffffffffUL
+#define __FLT_IS_IEC_60559__ 2
+#define __GNUC_WIDE_EXECUTION_CHARSET_NAME "UTF-32LE"
+#define __FLT64X_DIG__ 18
+#define __INT8_TYPE__ signed char
+#define __cpp_digit_separators 201309L
+#define __ELF__ 1
+#define __GCC_ASM_FLAG_OUTPUTS__ 1
+#define __UINT32_TYPE__ unsigned int
+#define __FLT_RADIX__ 2
+#define __INT_LEAST16_TYPE__ short int
+#define __LDBL_EPSILON__ 1.08420217248550443400745280086994171e-19L
+#define __UINTMAX_C(c) c ## UL
+#define __GLIBCXX_BITSIZE_INT_N_0 128
+#define __k8 1
+#define __FLT32X_MIN__ 2.22507385850720138309023271733240406e-308F32x
+#define __SIG_ATOMIC_MAX__ 0x7fffffff
+#define __GCC_ATOMIC_WCHAR_T_LOCK_FREE 2
+#define __STDC_IEC_60559_BFP__ 201404L
+#define __SIZEOF_PTRDIFF_T__ 8
+#define __LDBL_DIG__ 18
+#define __FLT64_IS_IEC_60559__ 2
+#define __x86_64__ 1
+#define __FLT32X_MIN_EXP__ (-1021)
+#define __DEC32_SUBNORMAL_MIN__ 0.000001E-95DF
+#define __INT_FAST16_MAX__ 0x7fffffffffffffffL
+#define __FLT64_DIG__ 15
+#define __UINT_FAST32_MAX__ 0xffffffffffffffffUL
+#define __UINT_LEAST64_TYPE__ long unsigned int
+#define __FLT_HAS_QUIET_NAN__ 1
+#define __FLT_MAX_10_EXP__ 38
+#define __LONG_MAX__ 0x7fffffffffffffffL
+#define __FLT64X_HAS_DENORM__ 1
+#define __DEC128_SUBNORMAL_MIN__ 0.000000000000000000000000000000001E-6143DL
+#define __FLT_HAS_INFINITY__ 1
+#define __GNUC_EXECUTION_CHARSET_NAME "UTF-8"
+#define __cpp_unicode_literals 200710L
+#define __UINT_FAST16_TYPE__ long unsigned int
+#define __DEC64_MAX__ 9.999999999999999E384DD
+#define __INT_FAST32_WIDTH__ 64
+#define __CHAR16_TYPE__ short unsigned int
+#define __PRAGMA_REDEFINE_EXTNAME 1
+#define __SIZE_WIDTH__ 64
+#define __SEG_FS 1
+#define __INT_LEAST16_MAX__ 0x7fff
+#define __DEC64_MANT_DIG__ 16
+#define __INT64_MAX__ 0x7fffffffffffffffL
+#define __SEG_GS 1
+#define __FLT32_DENORM_MIN__ 1.40129846432481707092372958328991613e-45F32
+#define __SIG_ATOMIC_WIDTH__ 32
+#define __INT_LEAST64_TYPE__ long int
+#define __INT16_TYPE__ short int
+#define __INT_LEAST8_TYPE__ signed char
+#define __cpp_structured_bindings 201606L
+#define __SIZEOF_INT__ 4
+#define __DEC32_MAX_EXP__ 97
+#define __INT_FAST8_MAX__ 0x7f
+#define __FLT128_MAX__ 1.18973149535723176508575932662800702e+4932F128
+#define __INTPTR_MAX__ 0x7fffffffffffffffL
+#define __cpp_sized_deallocation 201309L
+#define __cpp_guaranteed_copy_elision 201606L
+#define linux 1
+#define __FLT64_HAS_QUIET_NAN__ 1
+#define __FLT32_MIN_10_EXP__ (-37)
+#define __EXCEPTIONS 1
+#define __PTRDIFF_WIDTH__ 64
+#define __LDBL_MANT_DIG__ 64
+#define __cpp_range_based_for 201603L
+#define __FLT64_HAS_INFINITY__ 1
+#define __FLT64X_MAX__ 1.18973149535723176502126385303097021e+4932F64x
+#define __STDCPP_DEFAULT_NEW_ALIGNMENT__ 16
+#define __SIG_ATOMIC_MIN__ (-__SIG_ATOMIC_MAX__ - 1)
+#define __code_model_small__ 1
+#define __GCC_ATOMIC_LONG_LOCK_FREE 2
+#define __cpp_nontype_template_args 201411L
+#define __DEC32_MANT_DIG__ 7
+#define __cpp_return_type_deduction 201304L
+#define __k8__ 1
+#define __INTPTR_TYPE__ long int
+#define __UINT16_TYPE__ short unsigned int
+#define __WCHAR_TYPE__ int
+#define __pic__ 2
+#define __UINTPTR_MAX__ 0xffffffffffffffffUL
+#define __INT_FAST64_WIDTH__ 64
+#define __cpp_decltype 200707L
+#define __INT_FAST64_MAX__ 0x7fffffffffffffffL
+#define __GCC_ATOMIC_TEST_AND_SET_TRUEVAL 1
+#define __FLT_NORM_MAX__ 3.40282346638528859811704183484516925e+38F
+#define __FLT64X_MAX_EXP__ 16384
+#define __UINT_FAST64_TYPE__ long unsigned int
+#define __cpp_inline_variables 201606L
+#define __INT_MAX__ 0x7fffffff
+#define __linux__ 1
+#define __INT64_TYPE__ long int
+#define __FLT_MAX_EXP__ 128
+#define __ORDER_BIG_ENDIAN__ 4321
+#define __DBL_MANT_DIG__ 53
+#define __cpp_inheriting_constructors 201511L
+#define __SIZEOF_FLOAT128__ 16
+#define __INT_LEAST64_MAX__ 0x7fffffffffffffffL
+#define __DEC64_MIN__ 1E-383DD
+#define __WINT_TYPE__ unsigned int
+#define __UINT_LEAST32_TYPE__ unsigned int
+#define __SIZEOF_SHORT__ 2
+#define __FLT32_NORM_MAX__ 3.40282346638528859811704183484516925e+38F32
+#define __SSE__ 1
+#define __LDBL_MIN_EXP__ (-16381)
+#define __FLT64_MAX__ 1.79769313486231570814527423731704357e+308F64
+#define __amd64__ 1
+#define __WINT_WIDTH__ 32
+#define __INT_LEAST64_WIDTH__ 64
+#define __LDBL_MAX_EXP__ 16384
+#define __FLT32X_MAX_10_EXP__ 308
+#define __SIZEOF_INT128__ 16
+#define __FLT64X_IS_IEC_60559__ 2
+#define __LDBL_MAX_10_EXP__ 4932
+#define __ATOMIC_RELAXED 0
+#define __DBL_EPSILON__ double(2.22044604925031308084726333618164062e-16L)
+#define __FLT128_MIN__ 3.36210314311209350626267781732175260e-4932F128
+#define _LP64 1
+#define __UINT8_C(c) c
+#define __FLT64_MAX_EXP__ 1024
+#define __INT_LEAST32_TYPE__ int
+#define __SIZEOF_WCHAR_T__ 4
+#define __GNUC_PATCHLEVEL__ 0
+#define __FLT128_NORM_MAX__ 1.18973149535723176508575932662800702e+4932F128
+#define __FLT64_NORM_MAX__ 1.79769313486231570814527423731704357e+308F64
+#define __FLT128_HAS_QUIET_NAN__ 1
+#define __INTMAX_MAX__ 0x7fffffffffffffffL
+#define __INT_FAST8_TYPE__ signed char
+#define __cpp_namespace_attributes 201411L
+#define __FLT64X_MIN__ 3.36210314311209350626267781732175260e-4932F64x
+#define __STDCPP_THREADS__ 1
+#define __GNUC_STDC_INLINE__ 1
+#define __FLT64_HAS_DENORM__ 1
+#define __FLT32_EPSILON__ 1.19209289550781250000000000000000000e-7F32
+#define __DBL_DECIMAL_DIG__ 17
+#define __STDC_UTF_32__ 1
+#define __INT_FAST8_WIDTH__ 8
+#define __FXSR__ 1
+#define __FLT32X_MAX__ 1.79769313486231570814527423731704357e+308F32x
+#define __DBL_NORM_MAX__ double(1.79769313486231570814527423731704357e+308L)
+#define __BYTE_ORDER__ __ORDER_LITTLE_ENDIAN__
+#define __INTMAX_WIDTH__ 64
+#define __cpp_runtime_arrays 198712L
+#define __UINT64_TYPE__ long unsigned int
+#define __UINT32_C(c) c ## U
+#define __cpp_alias_templates 200704L
+#define __FLT_DENORM_MIN__ 1.40129846432481707092372958328991613e-45F
+#define __FLT128_IS_IEC_60559__ 2
+#define __INT8_MAX__ 0x7f
+#define __LONG_WIDTH__ 64
+#define __PIC__ 2
+#define __UINT_FAST32_TYPE__ long unsigned int
+#define __FLT32X_NORM_MAX__ 1.79769313486231570814527423731704357e+308F32x
+#define __CHAR32_TYPE__ unsigned int
+#define __FLT_MAX__ 3.40282346638528859811704183484516925e+38F
+#define __cpp_constexpr 201603L
+#define __SSE2__ 1
+#define __cpp_deduction_guides 201703L
+#define __INT32_TYPE__ int
+#define __SIZEOF_DOUBLE__ 8
+#define __cpp_exceptions 199711L
+#define __FLT_MIN_10_EXP__ (-37)
+#define __FLT64_MIN__ 2.22507385850720138309023271733240406e-308F64
+#define __INT_LEAST32_WIDTH__ 32
+#define __INTMAX_TYPE__ long int
+#define __DEC128_MAX_EXP__ 6145
+#define __FLT32X_HAS_QUIET_NAN__ 1
+#define __ATOMIC_CONSUME 1
+#define __GNUC_MINOR__ 4
+#define __GLIBCXX_TYPE_INT_N_0 __int128
+#define __INT_FAST16_WIDTH__ 64
+#define __UINTMAX_MAX__ 0xffffffffffffffffUL
+#define __PIE__ 2
+#define __FLT32X_DENORM_MIN__ 4.94065645841246544176568792868221372e-324F32x
+#define __cpp_template_template_args 201611L
+#define __DBL_MAX_10_EXP__ 308
+#define __LDBL_DENORM_MIN__ 3.64519953188247460252840593361941982e-4951L
+#define __INT16_C(c) c
+#define __STDC__ 1
+#define __FLT32X_DIG__ 15
+#define __PTRDIFF_TYPE__ long int
+#define __ATOMIC_SEQ_CST 5
+#define __FLT32X_MIN_10_EXP__ (-307)
+#define __UINTPTR_TYPE__ long unsigned int
+#define __DEC64_SUBNORMAL_MIN__ 0.000000000000001E-383DD
+#define __DEC128_MANT_DIG__ 34
+#define __LDBL_MIN_10_EXP__ (-4931)
+#define __cpp_generic_lambdas 201304L
+#define __SSE_MATH__ 1
+#define __SIZEOF_LONG_LONG__ 8
+#define __cpp_user_defined_literals 200809L
+#define __FLT128_DECIMAL_DIG__ 36
+#define __GCC_ATOMIC_LLONG_LOCK_FREE 2
+#define __FLT32_HAS_QUIET_NAN__ 1
+#define __FLT_DECIMAL_DIG__ 9
+#define __UINT_FAST16_MAX__ 0xffffffffffffffffUL
+#define __LDBL_NORM_MAX__ 1.18973149535723176502126385303097021e+4932L
+#define __GCC_ATOMIC_SHORT_LOCK_FREE 2
+#define __UINT_FAST8_TYPE__ unsigned char
+#define _GNU_SOURCE 1
+#define __cpp_init_captures 201304L
+#define __ATOMIC_ACQ_REL 4
+#define __ATOMIC_RELEASE 3
+
+```
+
+### Allclean.sh
+
+```
+rm -rf moc/
+rm -rf obj/
+rm Makefile
+rm .qmake.stash
+rm jetsonCamApp
+```
+
+### build.pro
+
+```
+TEMPLATE = app
+TARGET = jetsonCamApp
+QT += widgets concurrent
+OBJECTS_DIR = obj
+MOC_DIR = moc
+SOURCES += src/main.cpp
+HEADERS += src/appwindow.h src/camerahandler.h
+
+# Linux用の設定
+unix:!macx {
+    # 64ビットx86アーキテクチャの場合
+    contains(QT_ARCH, "x86_64") {
+        message("Configuring for x86_64 Linux")
+        INCLUDEPATH += /opt/spinnaker/include/
+        LIBS += -L/opt/spinnaker/lib -lSpinnaker -L./obj -lcuda_functions
+    }
+
+    # 64ビットARMアーキテクチャの場合
+    contains(QT_ARCH, "arm64") {
+        message("Configuring for arm64 Linux")
+        INCLUDEPATH += /opt/spinnaker/include/
+        LIBS += -L/opt/spinnaker/lib -lSpinnaker -L./obj -lcuda_functions
+    }
+}
+
+# Windows用の設定
+win32 {
+    # Windows特有の設定
+}
+
+```
+
+### CUDAbuild.sh
+
+```
+nvcc -c ./src/cuda_functions.cu -o ./obj/cuda_functions.o --extended-lambda
+ar rcs ./obj/libcuda_functions.a ./obj/cuda_functions.o
+```
+
+### .qmake.stash
+
+```
+QMAKE_CXX.QT_COMPILER_STDCXX = 201703L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 11
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 4
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    /usr/include/c++/11 \
+    /usr/include/x86_64-linux-gnu/c++/11 \
+    /usr/include/c++/11/backward \
+    /usr/lib/gcc/x86_64-linux-gnu/11/include \
+    /usr/local/include \
+    /usr/include/x86_64-linux-gnu \
+    /usr/include
+QMAKE_CXX.LIBDIRS = \
+    /usr/lib/gcc/x86_64-linux-gnu/11 \
+    /usr/lib/x86_64-linux-gnu \
+    /usr/lib \
+    /lib/x86_64-linux-gnu \
+    /lib \
+    .
+
+```
+
+### Makefile
+
+```
+#############################################################################
+# Makefile for building: jetsonCamApp
+# Generated by qmake (3.1) (Qt 5.15.2)
+# Project:  build.pro
+# Template: app
+# Command: /home/dai/anaconda3/bin/qmake -o Makefile build.pro
+#############################################################################
+
+MAKEFILE      = Makefile
+
+EQ            = =
+
+####### Compiler, tools and options
+
+CC            = gcc
+CXX           = g++
+DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CONCURRENT_LIB -DQT_CORE_LIB
+CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
+INCPATH       = -I. -I/opt/spinnaker/include -I../../../anaconda3/include/qt -I../../../anaconda3/include/qt/QtWidgets -I../../../anaconda3/include/qt/QtGui -I../../../anaconda3/include/qt/QtConcurrent -I../../../anaconda3/include/qt/QtCore -Imoc -I../../../anaconda3/include -I/croot/qt-main_1693210824277/_build_env/bin/../x86_64-conda-linux-gnu/sysroot/usr/include -I/croot/qt-main_1693210824277/_build_env/bin/../x86_64-conda-linux-gnu/sysroot/usr/include/libdrm -I/croot/qt-main_1693210824277/_build_env/bin/../x86_64-conda-linux-gnu/sysroot/usr/include -I../../../anaconda3/mkspecs/linux-g++
+QMAKE         = /home/dai/anaconda3/bin/qmake
+DEL_FILE      = rm -f
+CHK_DIR_EXISTS= test -d
+MKDIR         = mkdir -p
+COPY          = cp -f
+COPY_FILE     = cp -f
+COPY_DIR      = cp -f -R
+INSTALL_FILE  = install -m 644 -p
+INSTALL_PROGRAM = install -m 755 -p
+INSTALL_DIR   = cp -f -R
+QINSTALL      = /home/dai/anaconda3/bin/qmake -install qinstall
+QINSTALL_PROGRAM = /home/dai/anaconda3/bin/qmake -install qinstall -exe
+DEL_FILE      = rm -f
+SYMLINK       = ln -f -s
+DEL_DIR       = rmdir
+MOVE          = mv -f
+TAR           = tar -cf
+COMPRESS      = gzip -9f
+DISTNAME      = jetsonCamApp1.0.0
+DISTDIR = /home/dai/Documents/repos/jetsonCamApp/obj/jetsonCamApp1.0.0
+LINK          = g++
+LFLAGS        = -Wl,-O1 -Wl,-rpath,/home/dai/anaconda3/lib
+LIBS          = $(SUBLIBS) -L/opt/spinnaker/lib -lSpinnaker -L./obj -lcuda_functions /home/dai/anaconda3/lib/libQt5Widgets.so /home/dai/anaconda3/lib/libQt5Gui.so /home/dai/anaconda3/lib/libQt5Concurrent.so /home/dai/anaconda3/lib/libQt5Core.so -L/croot/qt-main_1693210824277/_build_env/bin/../x86_64-conda-linux-gnu/sysroot/usr/lib64 -lGL -lpthread   
+AR            = ar cqs
+RANLIB        = 
+SED           = sed
+STRIP         = strip
+
+####### Output directory
+
+OBJECTS_DIR   = obj/
+
+####### Files
+
+SOURCES       = src/main.cpp moc/moc_appwindow.cpp
+OBJECTS       = obj/main.o \
+		obj/moc_appwindow.o
+DIST          = ../../../anaconda3/mkspecs/features/spec_pre.prf \
+		../../../anaconda3/mkspecs/common/unix.conf \
+		../../../anaconda3/mkspecs/common/linux.conf \
+		../../../anaconda3/mkspecs/common/sanitize.conf \
+		../../../anaconda3/mkspecs/common/gcc-base.conf \
+		../../../anaconda3/mkspecs/common/gcc-base-unix.conf \
+		../../../anaconda3/mkspecs/common/g++-base.conf \
+		../../../anaconda3/mkspecs/common/g++-unix.conf \
+		../../../anaconda3/mkspecs/qconfig.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3danimation.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3danimation_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dcore.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dcore_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dextras.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dextras_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dinput.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dinput_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dlogic.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dlogic_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquick.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquick_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickanimation.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickanimation_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickextras.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickextras_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickinput.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickinput_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickrender.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickrender_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickscene2d.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickscene2d_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3drender.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3drender_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_accessibility_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_bluetooth.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_bluetooth_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_bodymovin_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_charts.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_charts_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_concurrent.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_concurrent_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_core.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_core_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_datavisualization.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_datavisualization_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_dbus.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_dbus_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_designer.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_designer_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_designercomponents_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_edid_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_egl_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_fb_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_gamepad.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_gamepad_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_glx_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_gui.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_gui_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_help.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_help_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_input_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_kms_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_location.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_location_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimedia.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimedia_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimediagsttools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_network.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_network_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_networkauth.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_networkauth_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_nfc.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_nfc_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_opengl.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_opengl_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_openglextensions.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_openglextensions_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_pdf.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_pdf_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_pdfwidgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_pdfwidgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_positioning.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_positioning_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_positioningquick.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_positioningquick_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_printsupport.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_printsupport_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_purchasing.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_purchasing_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qml.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qml_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmldebug_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmldevtools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmlmodels.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmlmodels_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmltest.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmltest_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmlworkerscript.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3d.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3d_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3dassetimport.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3drender.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3drender_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3druntimerender.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3dutils.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3dutils_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickwidgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_remoteobjects.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_remoteobjects_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_repparser.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_repparser_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_script.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_script_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_scripttools.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_scripttools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_scxml.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_scxml_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_sensors.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_sensors_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_serialbus.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_serialbus_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_serialport.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_serialport_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_service_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_sql.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_sql_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_svg.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_svg_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_testlib.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_testlib_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_texttospeech.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_texttospeech_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_theme_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_uiplugin.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_uitools.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_uitools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_virtualkeyboard.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_virtualkeyboard_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webchannel.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webchannel_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webengine.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webengine_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginecore.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginecore_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginewidgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_websockets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_websockets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webview.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webview_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_widgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_widgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_x11extras.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_x11extras_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xkbcommon_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xml.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xml_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xmlpatterns.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
+		../../../anaconda3/mkspecs/features/qt_functions.prf \
+		../../../anaconda3/mkspecs/features/qt_config.prf \
+		../../../anaconda3/mkspecs/linux-g++/qmake.conf \
+		../../../anaconda3/mkspecs/features/spec_post.prf \
+		.qmake.stash \
+		../../../anaconda3/mkspecs/features/exclusive_builds.prf \
+		../../../anaconda3/mkspecs/features/toolchain.prf \
+		../../../anaconda3/mkspecs/features/default_pre.prf \
+		../../../anaconda3/mkspecs/features/resolve_config.prf \
+		../../../anaconda3/mkspecs/features/default_post.prf \
+		../../../anaconda3/mkspecs/features/warn_on.prf \
+		../../../anaconda3/mkspecs/features/qt.prf \
+		../../../anaconda3/mkspecs/features/resources_functions.prf \
+		../../../anaconda3/mkspecs/features/resources.prf \
+		../../../anaconda3/mkspecs/features/moc.prf \
+		../../../anaconda3/mkspecs/features/unix/opengl.prf \
+		../../../anaconda3/mkspecs/features/uic.prf \
+		../../../anaconda3/mkspecs/features/unix/thread.prf \
+		../../../anaconda3/mkspecs/features/qmake_use.prf \
+		../../../anaconda3/mkspecs/features/file_copies.prf \
+		../../../anaconda3/mkspecs/features/testcase_targets.prf \
+		../../../anaconda3/mkspecs/features/exceptions.prf \
+		../../../anaconda3/mkspecs/features/yacc.prf \
+		../../../anaconda3/mkspecs/features/lex.prf \
+		build.pro src/appwindow.h \
+		src/camerahandler.h src/main.cpp
+QMAKE_TARGET  = jetsonCamApp
+DESTDIR       = 
+TARGET        = jetsonCamApp
+
+
+first: all
+####### Build rules
+
+jetsonCamApp:  $(OBJECTS)  
+	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
+
+Makefile: build.pro ../../../anaconda3/mkspecs/linux-g++/qmake.conf ../../../anaconda3/mkspecs/features/spec_pre.prf \
+		../../../anaconda3/mkspecs/common/unix.conf \
+		../../../anaconda3/mkspecs/common/linux.conf \
+		../../../anaconda3/mkspecs/common/sanitize.conf \
+		../../../anaconda3/mkspecs/common/gcc-base.conf \
+		../../../anaconda3/mkspecs/common/gcc-base-unix.conf \
+		../../../anaconda3/mkspecs/common/g++-base.conf \
+		../../../anaconda3/mkspecs/common/g++-unix.conf \
+		../../../anaconda3/mkspecs/qconfig.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3danimation.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3danimation_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dcore.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dcore_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dextras.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dextras_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dinput.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dinput_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dlogic.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dlogic_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquick.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquick_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickanimation.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickanimation_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickextras.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickextras_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickinput.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickinput_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickrender.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickrender_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickscene2d.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3dquickscene2d_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3drender.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_3drender_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_accessibility_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_bluetooth.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_bluetooth_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_bodymovin_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_charts.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_charts_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_concurrent.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_concurrent_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_core.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_core_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_datavisualization.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_datavisualization_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_dbus.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_dbus_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_designer.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_designer_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_designercomponents_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_edid_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_egl_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_fb_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_gamepad.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_gamepad_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_glx_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_gui.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_gui_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_help.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_help_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_input_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_kms_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_location.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_location_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimedia.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimedia_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimediagsttools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_network.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_network_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_networkauth.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_networkauth_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_nfc.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_nfc_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_opengl.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_opengl_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_openglextensions.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_openglextensions_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_pdf.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_pdf_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_pdfwidgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_pdfwidgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_positioning.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_positioning_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_positioningquick.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_positioningquick_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_printsupport.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_printsupport_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_purchasing.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_purchasing_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qml.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qml_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmldebug_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmldevtools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmlmodels.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmlmodels_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmltest.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmltest_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmlworkerscript.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3d.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3d_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3dassetimport.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3drender.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3drender_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3druntimerender.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3dutils.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick3dutils_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quick_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickwidgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_remoteobjects.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_remoteobjects_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_repparser.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_repparser_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_script.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_script_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_scripttools.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_scripttools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_scxml.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_scxml_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_sensors.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_sensors_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_serialbus.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_serialbus_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_serialport.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_serialport_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_service_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_sql.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_sql_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_svg.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_svg_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_testlib.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_testlib_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_texttospeech.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_texttospeech_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_theme_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_uiplugin.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_uitools.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_uitools_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_virtualkeyboard.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_virtualkeyboard_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webchannel.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webchannel_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webengine.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webengine_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginecore.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginecore_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginewidgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_websockets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_websockets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webview.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_webview_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_widgets.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_widgets_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_x11extras.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_x11extras_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xkbcommon_support_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xml.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xml_private.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xmlpatterns.pri \
+		../../../anaconda3/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
+		../../../anaconda3/mkspecs/features/qt_functions.prf \
+		../../../anaconda3/mkspecs/features/qt_config.prf \
+		../../../anaconda3/mkspecs/linux-g++/qmake.conf \
+		../../../anaconda3/mkspecs/features/spec_post.prf \
+		.qmake.stash \
+		../../../anaconda3/mkspecs/features/exclusive_builds.prf \
+		../../../anaconda3/mkspecs/features/toolchain.prf \
+		../../../anaconda3/mkspecs/features/default_pre.prf \
+		../../../anaconda3/mkspecs/features/resolve_config.prf \
+		../../../anaconda3/mkspecs/features/default_post.prf \
+		../../../anaconda3/mkspecs/features/warn_on.prf \
+		../../../anaconda3/mkspecs/features/qt.prf \
+		../../../anaconda3/mkspecs/features/resources_functions.prf \
+		../../../anaconda3/mkspecs/features/resources.prf \
+		../../../anaconda3/mkspecs/features/moc.prf \
+		../../../anaconda3/mkspecs/features/unix/opengl.prf \
+		../../../anaconda3/mkspecs/features/uic.prf \
+		../../../anaconda3/mkspecs/features/unix/thread.prf \
+		../../../anaconda3/mkspecs/features/qmake_use.prf \
+		../../../anaconda3/mkspecs/features/file_copies.prf \
+		../../../anaconda3/mkspecs/features/testcase_targets.prf \
+		../../../anaconda3/mkspecs/features/exceptions.prf \
+		../../../anaconda3/mkspecs/features/yacc.prf \
+		../../../anaconda3/mkspecs/features/lex.prf \
+		build.pro
+	$(QMAKE) -o Makefile build.pro
+../../../anaconda3/mkspecs/features/spec_pre.prf:
+../../../anaconda3/mkspecs/common/unix.conf:
+../../../anaconda3/mkspecs/common/linux.conf:
+../../../anaconda3/mkspecs/common/sanitize.conf:
+../../../anaconda3/mkspecs/common/gcc-base.conf:
+../../../anaconda3/mkspecs/common/gcc-base-unix.conf:
+../../../anaconda3/mkspecs/common/g++-base.conf:
+../../../anaconda3/mkspecs/common/g++-unix.conf:
+../../../anaconda3/mkspecs/qconfig.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3danimation.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3danimation_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dcore.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dcore_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dextras.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dextras_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dinput.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dinput_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dlogic.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dlogic_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquick.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquick_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickanimation.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickanimation_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickextras.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickextras_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickinput.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickinput_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickrender.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickrender_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickscene2d.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3dquickscene2d_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3drender.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_3drender_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_accessibility_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_bluetooth.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_bluetooth_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_bodymovin_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_bootstrap_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_charts.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_charts_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_concurrent.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_concurrent_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_core.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_core_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_datavisualization.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_datavisualization_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_dbus.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_dbus_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_designer.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_designer_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_designercomponents_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_edid_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_egl_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_fb_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_fontdatabase_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_gamepad.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_gamepad_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_glx_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_gui.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_gui_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_help.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_help_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_input_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_kms_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_location.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_location_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_multimedia.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_multimedia_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_multimediagsttools_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_multimediawidgets.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_network.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_network_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_networkauth.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_networkauth_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_nfc.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_nfc_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_opengl.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_opengl_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_openglextensions.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_openglextensions_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_packetprotocol_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_pdf.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_pdf_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_pdfwidgets.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_pdfwidgets_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_platformcompositor_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_positioning.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_positioning_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_positioningquick.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_positioningquick_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_printsupport.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_printsupport_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_purchasing.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_purchasing_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qml.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qml_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qmldebug_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qmldevtools_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qmlmodels.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qmlmodels_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qmltest.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qmltest_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qmlworkerscript.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qmlworkerscript_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3d.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3d_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3dassetimport.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3dassetimport_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3drender.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3drender_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3druntimerender.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3druntimerender_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3dutils.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick3dutils_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quick_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quickcontrols2.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quickparticles_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quickshapes_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quicktemplates2.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quickwidgets.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_quickwidgets_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_remoteobjects.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_remoteobjects_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_repparser.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_repparser_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_script.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_script_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_scripttools.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_scripttools_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_scxml.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_scxml_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_sensors.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_sensors_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_serialbus.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_serialbus_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_serialport.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_serialport_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_service_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_sql.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_sql_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_svg.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_svg_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_testlib.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_testlib_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_texttospeech.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_texttospeech_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_theme_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_uiplugin.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_uitools.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_uitools_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_virtualkeyboard.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_virtualkeyboard_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webchannel.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webchannel_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webengine.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webengine_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webenginecore.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webenginecore_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webenginewidgets.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webenginewidgets_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_websockets.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_websockets_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webview.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_webview_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_widgets.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_widgets_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_x11extras.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_x11extras_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_xkbcommon_support_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_xml.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_xml_private.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_xmlpatterns.pri:
+../../../anaconda3/mkspecs/modules/qt_lib_xmlpatterns_private.pri:
+../../../anaconda3/mkspecs/features/qt_functions.prf:
+../../../anaconda3/mkspecs/features/qt_config.prf:
+../../../anaconda3/mkspecs/linux-g++/qmake.conf:
+../../../anaconda3/mkspecs/features/spec_post.prf:
+.qmake.stash:
+../../../anaconda3/mkspecs/features/exclusive_builds.prf:
+../../../anaconda3/mkspecs/features/toolchain.prf:
+../../../anaconda3/mkspecs/features/default_pre.prf:
+../../../anaconda3/mkspecs/features/resolve_config.prf:
+../../../anaconda3/mkspecs/features/default_post.prf:
+../../../anaconda3/mkspecs/features/warn_on.prf:
+../../../anaconda3/mkspecs/features/qt.prf:
+../../../anaconda3/mkspecs/features/resources_functions.prf:
+../../../anaconda3/mkspecs/features/resources.prf:
+../../../anaconda3/mkspecs/features/moc.prf:
+../../../anaconda3/mkspecs/features/unix/opengl.prf:
+../../../anaconda3/mkspecs/features/uic.prf:
+../../../anaconda3/mkspecs/features/unix/thread.prf:
+../../../anaconda3/mkspecs/features/qmake_use.prf:
+../../../anaconda3/mkspecs/features/file_copies.prf:
+../../../anaconda3/mkspecs/features/testcase_targets.prf:
+../../../anaconda3/mkspecs/features/exceptions.prf:
+../../../anaconda3/mkspecs/features/yacc.prf:
+../../../anaconda3/mkspecs/features/lex.prf:
+build.pro:
+qmake: FORCE
+	@$(QMAKE) -o Makefile build.pro
+
+qmake_all: FORCE
+
+
+all: Makefile jetsonCamApp
+
+dist: distdir FORCE
+	(cd `dirname $(DISTDIR)` && $(TAR) $(DISTNAME).tar $(DISTNAME) && $(COMPRESS) $(DISTNAME).tar) && $(MOVE) `dirname $(DISTDIR)`/$(DISTNAME).tar.gz . && $(DEL_FILE) -r $(DISTDIR)
+
+distdir: FORCE
+	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
+	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../../../anaconda3/mkspecs/features/data/dummy.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/appwindow.h src/camerahandler.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp $(DISTDIR)/
+
+
+clean: compiler_clean 
+	-$(DEL_FILE) $(OBJECTS)
+	-$(DEL_FILE) *~ core *.core
+
+
+distclean: clean 
+	-$(DEL_FILE) $(TARGET) 
+	-$(DEL_FILE) .qmake.stash
+	-$(DEL_FILE) Makefile
+
+
+####### Sub-libraries
+
+mocclean: compiler_moc_header_clean compiler_moc_objc_header_clean compiler_moc_source_clean
+
+mocables: compiler_moc_header_make_all compiler_moc_objc_header_make_all compiler_moc_source_make_all
+
+check: first
+
+benchmark: first
+
+compiler_rcc_make_all:
+compiler_rcc_clean:
+compiler_moc_predefs_make_all: moc/moc_predefs.h
+compiler_moc_predefs_clean:
+	-$(DEL_FILE) moc/moc_predefs.h
+moc/moc_predefs.h: ../../../anaconda3/mkspecs/features/data/dummy.cpp
+	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc/moc_predefs.h ../../../anaconda3/mkspecs/features/data/dummy.cpp
+
+compiler_moc_header_make_all: moc/moc_appwindow.cpp
+compiler_moc_header_clean:
+	-$(DEL_FILE) moc/moc_appwindow.cpp
+moc/moc_appwindow.cpp: src/appwindow.h \
+		src/camerahandler.h \
+		/opt/spinnaker/include/Spinnaker.h \
+		/opt/spinnaker/include/SpinnakerPlatform.h \
+		/opt/spinnaker/include/SpinnakerDefs.h \
+		/opt/spinnaker/include/SpinGenApi/GCBase.h \
+		/opt/spinnaker/include/SpinGenApi/GCTypes.h \
+		/opt/spinnaker/include/SpinGenApi/GCString.h \
+		/opt/spinnaker/include/SpinGenApi/GCStringVector.h \
+		/opt/spinnaker/include/SpinGenApi/GCUtilities.h \
+		/opt/spinnaker/include/SpinGenApi/SpinnakerGenApi.h \
+		/opt/spinnaker/include/SpinGenApi/Node.h \
+		/opt/spinnaker/include/SpinGenApi/Types.h \
+		/opt/spinnaker/include/SpinGenApi/Autovector.h \
+		/opt/spinnaker/include/SpinGenApi/Base.h \
+		/opt/spinnaker/include/SpinGenApi/Container.h \
+		/opt/spinnaker/include/SpinGenApi/ISelector.h \
+		/opt/spinnaker/include/SpinGenApi/INode.h \
+		/opt/spinnaker/include/SpinGenApi/Reference.h \
+		/opt/spinnaker/include/SpinGenApi/NodeMap.h \
+		/opt/spinnaker/include/SpinGenApi/INodeMap.h \
+		/opt/spinnaker/include/SpinGenApi/IPort.h \
+		/opt/spinnaker/include/SpinGenApi/Synch.h \
+		/opt/spinnaker/include/SpinGenApi/IDeviceInfo.h \
+		/opt/spinnaker/include/SpinGenApi/ValueNode.h \
+		/opt/spinnaker/include/SpinGenApi/IValue.h \
+		/opt/spinnaker/include/SpinGenApi/EnumNodeT.h \
+		/opt/spinnaker/include/SpinGenApi/EnumNode.h \
+		/opt/spinnaker/include/SpinGenApi/IEnumeration.h \
+		/opt/spinnaker/include/SpinGenApi/IEnumEntry.h \
+		/opt/spinnaker/include/SpinGenApi/IEnumerationT.h \
+		/opt/spinnaker/include/SpinGenApi/Pointer.h \
+		/opt/spinnaker/include/SpinGenApi/ICategory.h \
+		/opt/spinnaker/include/SpinGenApi/IInteger.h \
+		/opt/spinnaker/include/SpinGenApi/IFloat.h \
+		/opt/spinnaker/include/SpinGenApi/IRegister.h \
+		/opt/spinnaker/include/SpinGenApi/IBoolean.h \
+		/opt/spinnaker/include/SpinGenApi/IPortRecorder.h \
+		/opt/spinnaker/include/SpinGenApi/IPortConstruct.h \
+		/opt/spinnaker/include/SpinGenApi/IChunkPort.h \
+		/opt/spinnaker/include/SpinGenApi/IString.h \
+		/opt/spinnaker/include/SpinGenApi/INodeMapDyn.h \
+		/opt/spinnaker/include/SpinGenApi/IDestroy.h \
+		/opt/spinnaker/include/SpinGenApi/ICommand.h \
+		/opt/spinnaker/include/Exception.h \
+		/opt/spinnaker/include/SpinGenApi/EnumEntryNode.h \
+		/opt/spinnaker/include/SpinGenApi/PortNode.h \
+		/opt/spinnaker/include/SpinGenApi/IntegerNode.h \
+		/opt/spinnaker/include/SpinGenApi/FloatNode.h \
+		/opt/spinnaker/include/SpinGenApi/StringNode.h \
+		/opt/spinnaker/include/SpinGenApi/BooleanNode.h \
+		/opt/spinnaker/include/SpinGenApi/NodeCallback.h \
+		/opt/spinnaker/include/SpinGenApi/EnumClasses.h \
+		/opt/spinnaker/include/SpinGenApi/CategoryNode.h \
+		/opt/spinnaker/include/SpinGenApi/CommandNode.h \
+		/opt/spinnaker/include/SpinGenApi/RegisterNode.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapter.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapterGeneric.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapterDcam.h \
+		/opt/spinnaker/include/SpinGenApi/Compatibility.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapterU3V.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapterGEV.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkPort.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapter.h \
+		/opt/spinnaker/include/SpinGenApi/EventPort.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapterGeneric.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapter1394.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapterU3V.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapterGEV.h \
+		/opt/spinnaker/include/SpinGenApi/IntRegNode.h \
+		/opt/spinnaker/include/SpinGenApi/StringRegNode.h \
+		/opt/spinnaker/include/SpinGenApi/FloatRegNode.h \
+		/opt/spinnaker/include/SpinGenApi/PortWriteList.h \
+		/opt/spinnaker/include/SpinGenApi/Persistence.h \
+		/opt/spinnaker/include/SpinGenApi/ISelectorDigit.h \
+		/opt/spinnaker/include/SpinGenApi/Filestream.h \
+		/opt/spinnaker/include/System.h \
+		/opt/spinnaker/include/Interface/ISystem.h \
+		/opt/spinnaker/include/InterfaceList.h \
+		/opt/spinnaker/include/Interface/IInterfaceList.h \
+		/opt/spinnaker/include/InterfacePtr.h \
+		/opt/spinnaker/include/BasePtr.h \
+		/opt/spinnaker/include/Interface.h \
+		/opt/spinnaker/include/Interface/IInterface.h \
+		/opt/spinnaker/include/CameraList.h \
+		/opt/spinnaker/include/Interface/ICameraList.h \
+		/opt/spinnaker/include/Camera.h \
+		/opt/spinnaker/include/CameraBase.h \
+		/opt/spinnaker/include/Interface/ICameraBase.h \
+		/opt/spinnaker/include/TransportLayerStream.h \
+		/opt/spinnaker/include/TransportLayerDefs.h \
+		/opt/spinnaker/include/TransportLayerDevice.h \
+		/opt/spinnaker/include/EventHandler.h \
+		/opt/spinnaker/include/Interface/IImageList.h \
+		/opt/spinnaker/include/Image.h \
+		/opt/spinnaker/include/Interface/IImage.h \
+		/opt/spinnaker/include/CameraDefs.h \
+		/opt/spinnaker/include/ChunkData.h \
+		/opt/spinnaker/include/Interface/IChunkData.h \
+		/opt/spinnaker/include/ChunkDataInference.h \
+		/opt/spinnaker/include/ImagePtr.h \
+		/opt/spinnaker/include/CameraPtr.h \
+		/opt/spinnaker/include/TransportLayerInterface.h \
+		/opt/spinnaker/include/TransportLayerSystem.h \
+		/opt/spinnaker/include/LoggingEventHandler.h \
+		/opt/spinnaker/include/Interface/ILoggingEventHandler.h \
+		/opt/spinnaker/include/LoggingEventDataPtr.h \
+		/opt/spinnaker/include/LoggingEventData.h \
+		/opt/spinnaker/include/SystemPtr.h \
+		/opt/spinnaker/include/ImageProcessor.h \
+		/opt/spinnaker/include/Interface/IImageProcessor.h \
+		/opt/spinnaker/include/ImageStatistics.h \
+		/opt/spinnaker/include/Interface/IImageStatistics.h \
+		/opt/spinnaker/include/ImageList.h \
+		/opt/spinnaker/include/InterfaceEventHandler.h \
+		/opt/spinnaker/include/Interface/IInterfaceEventHandler.h \
+		/opt/spinnaker/include/DeviceArrivalEventHandler.h \
+		/opt/spinnaker/include/Interface/IDeviceArrivalEventHandler.h \
+		/opt/spinnaker/include/DeviceRemovalEventHandler.h \
+		/opt/spinnaker/include/Interface/IDeviceRemovalEventHandler.h \
+		/opt/spinnaker/include/DeviceEventHandler.h \
+		/opt/spinnaker/include/Interface/IDeviceEventHandler.h \
+		/opt/spinnaker/include/ImageEventHandler.h \
+		/opt/spinnaker/include/Interface/IImageEventHandler.h \
+		/opt/spinnaker/include/ImageListEventHandler.h \
+		/opt/spinnaker/include/Interface/IImageListEventHandler.h \
+		/opt/spinnaker/include/InterfaceArrivalEventHandler.h \
+		/opt/spinnaker/include/Interface/IInterfaceArrivalEventHandler.h \
+		/opt/spinnaker/include/InterfaceRemovalEventHandler.h \
+		/opt/spinnaker/include/Interface/IInterfaceRemovalEventHandler.h \
+		/opt/spinnaker/include/SystemEventHandler.h \
+		/opt/spinnaker/include/Interface/ISystemEventHandler.h \
+		/opt/spinnaker/include/DeviceEventUtility.h \
+		/opt/spinnaker/include/ImageUtility.h \
+		/opt/spinnaker/include/ImageUtilityCCM.h \
+		/opt/spinnaker/include/ImageUtilityHeatmap.h \
+		/opt/spinnaker/include/ImageUtilityPolarization.h \
+		../../../anaconda3/include/qt/QtGui/QImage \
+		../../../anaconda3/include/qt/QtGui/qimage.h \
+		../../../anaconda3/include/qt/QtGui/qtguiglobal.h \
+		../../../anaconda3/include/qt/QtCore/qglobal.h \
+		../../../anaconda3/include/qt/QtCore/qconfig-bootstrapped.h \
+		../../../anaconda3/include/qt/QtCore/qconfig.h \
+		../../../anaconda3/include/qt/QtCore/qtcore-config.h \
+		../../../anaconda3/include/qt/QtCore/qsystemdetection.h \
+		../../../anaconda3/include/qt/QtCore/qprocessordetection.h \
+		../../../anaconda3/include/qt/QtCore/qcompilerdetection.h \
+		../../../anaconda3/include/qt/QtCore/qtypeinfo.h \
+		../../../anaconda3/include/qt/QtCore/qsysinfo.h \
+		../../../anaconda3/include/qt/QtCore/qlogging.h \
+		../../../anaconda3/include/qt/QtCore/qflags.h \
+		../../../anaconda3/include/qt/QtCore/qatomic.h \
+		../../../anaconda3/include/qt/QtCore/qbasicatomic.h \
+		../../../anaconda3/include/qt/QtCore/qatomic_bootstrap.h \
+		../../../anaconda3/include/qt/QtCore/qgenericatomic.h \
+		../../../anaconda3/include/qt/QtCore/qatomic_cxx11.h \
+		../../../anaconda3/include/qt/QtCore/qatomic_msvc.h \
+		../../../anaconda3/include/qt/QtCore/qglobalstatic.h \
+		../../../anaconda3/include/qt/QtCore/qmutex.h \
+		../../../anaconda3/include/qt/QtCore/qnumeric.h \
+		../../../anaconda3/include/qt/QtCore/qversiontagging.h \
+		../../../anaconda3/include/qt/QtGui/qtgui-config.h \
+		../../../anaconda3/include/qt/QtGui/qcolor.h \
+		../../../anaconda3/include/qt/QtGui/qrgb.h \
+		../../../anaconda3/include/qt/QtCore/qnamespace.h \
+		../../../anaconda3/include/qt/QtCore/qstringlist.h \
+		../../../anaconda3/include/qt/QtCore/qlist.h \
+		../../../anaconda3/include/qt/QtCore/qalgorithms.h \
+		../../../anaconda3/include/qt/QtCore/qiterator.h \
+		../../../anaconda3/include/qt/QtCore/qrefcount.h \
+		../../../anaconda3/include/qt/QtCore/qarraydata.h \
+		../../../anaconda3/include/qt/QtCore/qhashfunctions.h \
+		../../../anaconda3/include/qt/QtCore/qstring.h \
+		../../../anaconda3/include/qt/QtCore/qchar.h \
+		../../../anaconda3/include/qt/QtCore/qbytearray.h \
+		../../../anaconda3/include/qt/QtCore/qstringliteral.h \
+		../../../anaconda3/include/qt/QtCore/qstringalgorithms.h \
+		../../../anaconda3/include/qt/QtCore/qstringview.h \
+		../../../anaconda3/include/qt/QtCore/qstringbuilder.h \
+		../../../anaconda3/include/qt/QtCore/qpair.h \
+		../../../anaconda3/include/qt/QtCore/qvector.h \
+		../../../anaconda3/include/qt/QtCore/qcontainertools_impl.h \
+		../../../anaconda3/include/qt/QtCore/qpoint.h \
+		../../../anaconda3/include/qt/QtCore/qbytearraylist.h \
+		../../../anaconda3/include/qt/QtCore/qregexp.h \
+		../../../anaconda3/include/qt/QtCore/qstringmatcher.h \
+		../../../anaconda3/include/qt/QtGui/qrgba64.h \
+		../../../anaconda3/include/qt/QtGui/qpaintdevice.h \
+		../../../anaconda3/include/qt/QtGui/qwindowdefs.h \
+		../../../anaconda3/include/qt/QtCore/qobjectdefs.h \
+		../../../anaconda3/include/qt/QtCore/qobjectdefs_impl.h \
+		../../../anaconda3/include/qt/QtGui/qwindowdefs_win.h \
+		../../../anaconda3/include/qt/QtCore/qrect.h \
+		../../../anaconda3/include/qt/QtCore/qmargins.h \
+		../../../anaconda3/include/qt/QtCore/qsize.h \
+		../../../anaconda3/include/qt/QtGui/qpixelformat.h \
+		../../../anaconda3/include/qt/QtGui/qtransform.h \
+		../../../anaconda3/include/qt/QtGui/qmatrix.h \
+		../../../anaconda3/include/qt/QtGui/qpolygon.h \
+		../../../anaconda3/include/qt/QtGui/qregion.h \
+		../../../anaconda3/include/qt/QtCore/qdatastream.h \
+		../../../anaconda3/include/qt/QtCore/qscopedpointer.h \
+		../../../anaconda3/include/qt/QtCore/qiodevice.h \
+		../../../anaconda3/include/qt/QtCore/qobject.h \
+		../../../anaconda3/include/qt/QtCore/qcoreevent.h \
+		../../../anaconda3/include/qt/QtCore/qmetatype.h \
+		../../../anaconda3/include/qt/QtCore/qvarlengtharray.h \
+		../../../anaconda3/include/qt/QtCore/qcontainerfwd.h \
+		../../../anaconda3/include/qt/QtCore/qobject_impl.h \
+		../../../anaconda3/include/qt/QtCore/qline.h \
+		src/cuda_functions.h \
+		../../../anaconda3/include/qt/QtWidgets/QWidget \
+		../../../anaconda3/include/qt/QtWidgets/qwidget.h \
+		../../../anaconda3/include/qt/QtWidgets/qtwidgetsglobal.h \
+		../../../anaconda3/include/qt/QtWidgets/qtwidgets-config.h \
+		../../../anaconda3/include/qt/QtGui/qpalette.h \
+		../../../anaconda3/include/qt/QtGui/qbrush.h \
+		../../../anaconda3/include/qt/QtGui/qpixmap.h \
+		../../../anaconda3/include/qt/QtCore/qsharedpointer.h \
+		../../../anaconda3/include/qt/QtCore/qshareddata.h \
+		../../../anaconda3/include/qt/QtCore/qhash.h \
+		../../../anaconda3/include/qt/QtCore/qsharedpointer_impl.h \
+		../../../anaconda3/include/qt/QtGui/qfont.h \
+		../../../anaconda3/include/qt/QtGui/qfontmetrics.h \
+		../../../anaconda3/include/qt/QtGui/qfontinfo.h \
+		../../../anaconda3/include/qt/QtWidgets/qsizepolicy.h \
+		../../../anaconda3/include/qt/QtGui/qcursor.h \
+		../../../anaconda3/include/qt/QtGui/qkeysequence.h \
+		../../../anaconda3/include/qt/QtGui/qevent.h \
+		../../../anaconda3/include/qt/QtCore/qvariant.h \
+		../../../anaconda3/include/qt/QtCore/qmap.h \
+		../../../anaconda3/include/qt/QtCore/qdebug.h \
+		../../../anaconda3/include/qt/QtCore/qtextstream.h \
+		../../../anaconda3/include/qt/QtCore/qlocale.h \
+		../../../anaconda3/include/qt/QtCore/qset.h \
+		../../../anaconda3/include/qt/QtCore/qcontiguouscache.h \
+		../../../anaconda3/include/qt/QtCore/qurl.h \
+		../../../anaconda3/include/qt/QtCore/qurlquery.h \
+		../../../anaconda3/include/qt/QtCore/qfile.h \
+		../../../anaconda3/include/qt/QtCore/qfiledevice.h \
+		../../../anaconda3/include/qt/QtGui/qvector2d.h \
+		../../../anaconda3/include/qt/QtGui/qtouchdevice.h \
+		../../../anaconda3/include/qt/QtWidgets/QPushButton \
+		../../../anaconda3/include/qt/QtWidgets/qpushbutton.h \
+		../../../anaconda3/include/qt/QtWidgets/qabstractbutton.h \
+		../../../anaconda3/include/qt/QtGui/qicon.h \
+		../../../anaconda3/include/qt/QtWidgets/QLineEdit \
+		../../../anaconda3/include/qt/QtWidgets/qlineedit.h \
+		../../../anaconda3/include/qt/QtWidgets/qframe.h \
+		../../../anaconda3/include/qt/QtGui/qtextcursor.h \
+		../../../anaconda3/include/qt/QtGui/qtextformat.h \
+		../../../anaconda3/include/qt/QtGui/qpen.h \
+		../../../anaconda3/include/qt/QtGui/qtextoption.h \
+		../../../anaconda3/include/qt/QtWidgets/QFileDialog \
+		../../../anaconda3/include/qt/QtWidgets/qfiledialog.h \
+		../../../anaconda3/include/qt/QtCore/qdir.h \
+		../../../anaconda3/include/qt/QtCore/qfileinfo.h \
+		../../../anaconda3/include/qt/QtWidgets/qdialog.h \
+		../../../anaconda3/include/qt/QtWidgets/QVBoxLayout \
+		../../../anaconda3/include/qt/QtWidgets/qboxlayout.h \
+		../../../anaconda3/include/qt/QtWidgets/qlayout.h \
+		../../../anaconda3/include/qt/QtWidgets/qlayoutitem.h \
+		../../../anaconda3/include/qt/QtWidgets/qgridlayout.h \
+		../../../anaconda3/include/qt/QtWidgets/QHBoxLayout \
+		../../../anaconda3/include/qt/QtCore/QDebug \
+		../../../anaconda3/include/qt/QtWidgets/QLabel \
+		../../../anaconda3/include/qt/QtWidgets/qlabel.h \
+		../../../anaconda3/include/qt/QtCore/QTimer \
+		../../../anaconda3/include/qt/QtCore/qtimer.h \
+		../../../anaconda3/include/qt/QtCore/qbasictimer.h \
+		../../../anaconda3/include/qt/QtConcurrent/QtConcurrent \
+		../../../anaconda3/include/qt/QtConcurrent/QtConcurrentDepends \
+		../../../anaconda3/include/qt/QtCore/QtCore \
+		../../../anaconda3/include/qt/QtCore/QtCoreDepends \
+		../../../anaconda3/include/qt/QtCore/qabstractanimation.h \
+		../../../anaconda3/include/qt/QtCore/qabstracteventdispatcher.h \
+		../../../anaconda3/include/qt/QtCore/qeventloop.h \
+		../../../anaconda3/include/qt/QtCore/qabstractitemmodel.h \
+		../../../anaconda3/include/qt/QtCore/qabstractnativeeventfilter.h \
+		../../../anaconda3/include/qt/QtCore/qabstractproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qabstractstate.h \
+		../../../anaconda3/include/qt/QtCore/qabstracttransition.h \
+		../../../anaconda3/include/qt/QtCore/qanimationgroup.h \
+		../../../anaconda3/include/qt/QtCore/qarraydataops.h \
+		../../../anaconda3/include/qt/QtCore/qarraydatapointer.h \
+		../../../anaconda3/include/qt/QtCore/qbitarray.h \
+		../../../anaconda3/include/qt/QtCore/qbuffer.h \
+		../../../anaconda3/include/qt/QtCore/qbytearraymatcher.h \
+		../../../anaconda3/include/qt/QtCore/qcache.h \
+		../../../anaconda3/include/qt/QtCore/qcalendar.h \
+		../../../anaconda3/include/qt/QtCore/qcborarray.h \
+		../../../anaconda3/include/qt/QtCore/qcborvalue.h \
+		../../../anaconda3/include/qt/QtCore/qdatetime.h \
+		../../../anaconda3/include/qt/QtCore/qcborcommon.h \
+		../../../anaconda3/include/qt/QtCore/qregularexpression.h \
+		../../../anaconda3/include/qt/QtCore/quuid.h \
+		../../../anaconda3/include/qt/QtCore/qcbormap.h \
+		../../../anaconda3/include/qt/QtCore/qcborstream.h \
+		../../../anaconda3/include/qt/QtCore/qcborstreamreader.h \
+		../../../anaconda3/include/qt/QtCore/qfloat16.h \
+		../../../anaconda3/include/qt/QtCore/qcborstreamwriter.h \
+		../../../anaconda3/include/qt/QtCore/qcollator.h \
+		../../../anaconda3/include/qt/QtCore/qcommandlineoption.h \
+		../../../anaconda3/include/qt/QtCore/qcommandlineparser.h \
+		../../../anaconda3/include/qt/QtCore/qcoreapplication.h \
+		../../../anaconda3/include/qt/QtCore/qconcatenatetablesproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qcryptographichash.h \
+		../../../anaconda3/include/qt/QtCore/qdeadlinetimer.h \
+		../../../anaconda3/include/qt/QtCore/qelapsedtimer.h \
+		../../../anaconda3/include/qt/QtCore/qdiriterator.h \
+		../../../anaconda3/include/qt/QtCore/qeasingcurve.h \
+		../../../anaconda3/include/qt/QtCore/qendian.h \
+		../../../anaconda3/include/qt/QtCore/qeventtransition.h \
+		../../../anaconda3/include/qt/QtCore/qexception.h \
+		../../../anaconda3/include/qt/QtCore/qfactoryinterface.h \
+		../../../anaconda3/include/qt/QtCore/qfileselector.h \
+		../../../anaconda3/include/qt/QtCore/QObject \
+		../../../anaconda3/include/qt/QtCore/QStringList \
+		../../../anaconda3/include/qt/QtCore/qfilesystemwatcher.h \
+		../../../anaconda3/include/qt/QtCore/qfinalstate.h \
+		../../../anaconda3/include/qt/QtCore/qfuture.h \
+		../../../anaconda3/include/qt/QtCore/qfutureinterface.h \
+		../../../anaconda3/include/qt/QtCore/qrunnable.h \
+		../../../anaconda3/include/qt/QtCore/qresultstore.h \
+		../../../anaconda3/include/qt/QtCore/qfuturesynchronizer.h \
+		../../../anaconda3/include/qt/QtCore/qfuturewatcher.h \
+		../../../anaconda3/include/qt/QtCore/qhistorystate.h \
+		../../../anaconda3/include/qt/QtCore/qidentityproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qisenum.h \
+		../../../anaconda3/include/qt/QtCore/qitemselectionmodel.h \
+		../../../anaconda3/include/qt/QtCore/qjsonarray.h \
+		../../../anaconda3/include/qt/QtCore/qjsonvalue.h \
+		../../../anaconda3/include/qt/QtCore/qjsondocument.h \
+		../../../anaconda3/include/qt/QtCore/qjsonobject.h \
+		../../../anaconda3/include/qt/QtCore/qlibrary.h \
+		../../../anaconda3/include/qt/QtCore/qlibraryinfo.h \
+		../../../anaconda3/include/qt/QtCore/qversionnumber.h \
+		../../../anaconda3/include/qt/QtCore/qlinkedlist.h \
+		../../../anaconda3/include/qt/QtCore/qlockfile.h \
+		../../../anaconda3/include/qt/QtCore/qloggingcategory.h \
+		../../../anaconda3/include/qt/QtCore/qmath.h \
+		../../../anaconda3/include/qt/QtCore/qmessageauthenticationcode.h \
+		../../../anaconda3/include/qt/QtCore/qmetaobject.h \
+		../../../anaconda3/include/qt/QtCore/qmimedata.h \
+		../../../anaconda3/include/qt/QtCore/qmimedatabase.h \
+		../../../anaconda3/include/qt/QtCore/qmimetype.h \
+		../../../anaconda3/include/qt/QtCore/qobjectcleanuphandler.h \
+		../../../anaconda3/include/qt/QtCore/qoperatingsystemversion.h \
+		../../../anaconda3/include/qt/QtCore/qparallelanimationgroup.h \
+		../../../anaconda3/include/qt/QtCore/qpauseanimation.h \
+		../../../anaconda3/include/qt/QtCore/qplugin.h \
+		../../../anaconda3/include/qt/QtCore/qpointer.h \
+		../../../anaconda3/include/qt/QtCore/qpluginloader.h \
+		../../../anaconda3/include/qt/QtCore/qprocess.h \
+		../../../anaconda3/include/qt/QtCore/qpropertyanimation.h \
+		../../../anaconda3/include/qt/QtCore/qvariantanimation.h \
+		../../../anaconda3/include/qt/QtCore/qqueue.h \
+		../../../anaconda3/include/qt/QtCore/qrandom.h \
+		../../../anaconda3/include/qt/QtCore/qreadwritelock.h \
+		../../../anaconda3/include/qt/QtCore/qresource.h \
+		../../../anaconda3/include/qt/QtCore/qsavefile.h \
+		../../../anaconda3/include/qt/QtCore/qscopedvaluerollback.h \
+		../../../anaconda3/include/qt/QtCore/qscopeguard.h \
+		../../../anaconda3/include/qt/QtCore/qsemaphore.h \
+		../../../anaconda3/include/qt/QtCore/qsequentialanimationgroup.h \
+		../../../anaconda3/include/qt/QtCore/qsettings.h \
+		../../../anaconda3/include/qt/QtCore/qsharedmemory.h \
+		../../../anaconda3/include/qt/QtCore/qsignalmapper.h \
+		../../../anaconda3/include/qt/QtCore/qsignaltransition.h \
+		../../../anaconda3/include/qt/QtCore/qsocketnotifier.h \
+		../../../anaconda3/include/qt/QtCore/qsortfilterproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qstack.h \
+		../../../anaconda3/include/qt/QtCore/qstandardpaths.h \
+		../../../anaconda3/include/qt/QtCore/qstate.h \
+		../../../anaconda3/include/qt/QtCore/qstatemachine.h \
+		../../../anaconda3/include/qt/QtCore/qstorageinfo.h \
+		../../../anaconda3/include/qt/QtCore/qstringlistmodel.h \
+		../../../anaconda3/include/qt/QtCore/qsystemsemaphore.h \
+		../../../anaconda3/include/qt/QtCore/qtemporarydir.h \
+		../../../anaconda3/include/qt/QtCore/qtemporaryfile.h \
+		../../../anaconda3/include/qt/QtCore/qtextboundaryfinder.h \
+		../../../anaconda3/include/qt/QtCore/qtextcodec.h \
+		../../../anaconda3/include/qt/QtCore/qthread.h \
+		../../../anaconda3/include/qt/QtCore/qthreadpool.h \
+		../../../anaconda3/include/qt/QtCore/qthreadstorage.h \
+		../../../anaconda3/include/qt/QtCore/qtimeline.h \
+		../../../anaconda3/include/qt/QtCore/qtimezone.h \
+		../../../anaconda3/include/qt/QtCore/qtranslator.h \
+		../../../anaconda3/include/qt/QtCore/qtransposeproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qtypetraits.h \
+		../../../anaconda3/include/qt/QtCore/qwaitcondition.h \
+		../../../anaconda3/include/qt/QtCore/QDeadlineTimer \
+		../../../anaconda3/include/qt/QtCore/qwineventnotifier.h \
+		../../../anaconda3/include/qt/QtCore/qxmlstream.h \
+		../../../anaconda3/include/qt/QtCore/qtcoreversion.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentcompilertest.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrent_global.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentexception.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentfilter.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentfilterkernel.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentiteratekernel.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentmedian.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentthreadengine.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentmapkernel.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentreducekernel.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentfunctionwrappers.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentmap.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentrun.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentrunbase.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentstoredfunctioncall.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentversion.h \
+		../../../anaconda3/include/qt/QtWidgets/QMessageBox \
+		../../../anaconda3/include/qt/QtWidgets/qmessagebox.h \
+		moc/moc_predefs.h \
+		../../../anaconda3/bin/moc
+	/home/dai/anaconda3/bin/moc $(DEFINES) --include /home/dai/Documents/repos/jetsonCamApp/moc/moc_predefs.h -I/home/dai/anaconda3/mkspecs/linux-g++ -I/home/dai/Documents/repos/jetsonCamApp -I/opt/spinnaker/include -I/home/dai/anaconda3/include/qt -I/home/dai/anaconda3/include/qt/QtWidgets -I/home/dai/anaconda3/include/qt/QtGui -I/home/dai/anaconda3/include/qt/QtConcurrent -I/home/dai/anaconda3/include/qt/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/appwindow.h -o moc/moc_appwindow.cpp
+
+compiler_moc_objc_header_make_all:
+compiler_moc_objc_header_clean:
+compiler_moc_source_make_all:
+compiler_moc_source_clean:
+compiler_uic_make_all:
+compiler_uic_clean:
+compiler_yacc_decl_make_all:
+compiler_yacc_decl_clean:
+compiler_yacc_impl_make_all:
+compiler_yacc_impl_clean:
+compiler_lex_make_all:
+compiler_lex_clean:
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
+
+####### Compile
+
+obj/main.o: src/main.cpp src/appwindow.h \
+		src/camerahandler.h \
+		/opt/spinnaker/include/Spinnaker.h \
+		/opt/spinnaker/include/SpinnakerPlatform.h \
+		/opt/spinnaker/include/SpinnakerDefs.h \
+		/opt/spinnaker/include/SpinGenApi/GCBase.h \
+		/opt/spinnaker/include/SpinGenApi/GCTypes.h \
+		/opt/spinnaker/include/SpinGenApi/GCString.h \
+		/opt/spinnaker/include/SpinGenApi/GCStringVector.h \
+		/opt/spinnaker/include/SpinGenApi/GCUtilities.h \
+		/opt/spinnaker/include/SpinGenApi/SpinnakerGenApi.h \
+		/opt/spinnaker/include/SpinGenApi/Node.h \
+		/opt/spinnaker/include/SpinGenApi/Types.h \
+		/opt/spinnaker/include/SpinGenApi/Autovector.h \
+		/opt/spinnaker/include/SpinGenApi/Base.h \
+		/opt/spinnaker/include/SpinGenApi/Container.h \
+		/opt/spinnaker/include/SpinGenApi/ISelector.h \
+		/opt/spinnaker/include/SpinGenApi/INode.h \
+		/opt/spinnaker/include/SpinGenApi/Reference.h \
+		/opt/spinnaker/include/SpinGenApi/NodeMap.h \
+		/opt/spinnaker/include/SpinGenApi/INodeMap.h \
+		/opt/spinnaker/include/SpinGenApi/IPort.h \
+		/opt/spinnaker/include/SpinGenApi/Synch.h \
+		/opt/spinnaker/include/SpinGenApi/IDeviceInfo.h \
+		/opt/spinnaker/include/SpinGenApi/ValueNode.h \
+		/opt/spinnaker/include/SpinGenApi/IValue.h \
+		/opt/spinnaker/include/SpinGenApi/EnumNodeT.h \
+		/opt/spinnaker/include/SpinGenApi/EnumNode.h \
+		/opt/spinnaker/include/SpinGenApi/IEnumeration.h \
+		/opt/spinnaker/include/SpinGenApi/IEnumEntry.h \
+		/opt/spinnaker/include/SpinGenApi/IEnumerationT.h \
+		/opt/spinnaker/include/SpinGenApi/Pointer.h \
+		/opt/spinnaker/include/SpinGenApi/ICategory.h \
+		/opt/spinnaker/include/SpinGenApi/IInteger.h \
+		/opt/spinnaker/include/SpinGenApi/IFloat.h \
+		/opt/spinnaker/include/SpinGenApi/IRegister.h \
+		/opt/spinnaker/include/SpinGenApi/IBoolean.h \
+		/opt/spinnaker/include/SpinGenApi/IPortRecorder.h \
+		/opt/spinnaker/include/SpinGenApi/IPortConstruct.h \
+		/opt/spinnaker/include/SpinGenApi/IChunkPort.h \
+		/opt/spinnaker/include/SpinGenApi/IString.h \
+		/opt/spinnaker/include/SpinGenApi/INodeMapDyn.h \
+		/opt/spinnaker/include/SpinGenApi/IDestroy.h \
+		/opt/spinnaker/include/SpinGenApi/ICommand.h \
+		/opt/spinnaker/include/Exception.h \
+		/opt/spinnaker/include/SpinGenApi/EnumEntryNode.h \
+		/opt/spinnaker/include/SpinGenApi/PortNode.h \
+		/opt/spinnaker/include/SpinGenApi/IntegerNode.h \
+		/opt/spinnaker/include/SpinGenApi/FloatNode.h \
+		/opt/spinnaker/include/SpinGenApi/StringNode.h \
+		/opt/spinnaker/include/SpinGenApi/BooleanNode.h \
+		/opt/spinnaker/include/SpinGenApi/NodeCallback.h \
+		/opt/spinnaker/include/SpinGenApi/EnumClasses.h \
+		/opt/spinnaker/include/SpinGenApi/CategoryNode.h \
+		/opt/spinnaker/include/SpinGenApi/CommandNode.h \
+		/opt/spinnaker/include/SpinGenApi/RegisterNode.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapter.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapterGeneric.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapterDcam.h \
+		/opt/spinnaker/include/SpinGenApi/Compatibility.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapterU3V.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkAdapterGEV.h \
+		/opt/spinnaker/include/SpinGenApi/ChunkPort.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapter.h \
+		/opt/spinnaker/include/SpinGenApi/EventPort.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapterGeneric.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapter1394.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapterU3V.h \
+		/opt/spinnaker/include/SpinGenApi/EventAdapterGEV.h \
+		/opt/spinnaker/include/SpinGenApi/IntRegNode.h \
+		/opt/spinnaker/include/SpinGenApi/StringRegNode.h \
+		/opt/spinnaker/include/SpinGenApi/FloatRegNode.h \
+		/opt/spinnaker/include/SpinGenApi/PortWriteList.h \
+		/opt/spinnaker/include/SpinGenApi/Persistence.h \
+		/opt/spinnaker/include/SpinGenApi/ISelectorDigit.h \
+		/opt/spinnaker/include/SpinGenApi/Filestream.h \
+		/opt/spinnaker/include/System.h \
+		/opt/spinnaker/include/Interface/ISystem.h \
+		/opt/spinnaker/include/InterfaceList.h \
+		/opt/spinnaker/include/Interface/IInterfaceList.h \
+		/opt/spinnaker/include/InterfacePtr.h \
+		/opt/spinnaker/include/BasePtr.h \
+		/opt/spinnaker/include/Interface.h \
+		/opt/spinnaker/include/Interface/IInterface.h \
+		/opt/spinnaker/include/CameraList.h \
+		/opt/spinnaker/include/Interface/ICameraList.h \
+		/opt/spinnaker/include/Camera.h \
+		/opt/spinnaker/include/CameraBase.h \
+		/opt/spinnaker/include/Interface/ICameraBase.h \
+		/opt/spinnaker/include/TransportLayerStream.h \
+		/opt/spinnaker/include/TransportLayerDefs.h \
+		/opt/spinnaker/include/TransportLayerDevice.h \
+		/opt/spinnaker/include/EventHandler.h \
+		/opt/spinnaker/include/Interface/IImageList.h \
+		/opt/spinnaker/include/Image.h \
+		/opt/spinnaker/include/Interface/IImage.h \
+		/opt/spinnaker/include/CameraDefs.h \
+		/opt/spinnaker/include/ChunkData.h \
+		/opt/spinnaker/include/Interface/IChunkData.h \
+		/opt/spinnaker/include/ChunkDataInference.h \
+		/opt/spinnaker/include/ImagePtr.h \
+		/opt/spinnaker/include/CameraPtr.h \
+		/opt/spinnaker/include/TransportLayerInterface.h \
+		/opt/spinnaker/include/TransportLayerSystem.h \
+		/opt/spinnaker/include/LoggingEventHandler.h \
+		/opt/spinnaker/include/Interface/ILoggingEventHandler.h \
+		/opt/spinnaker/include/LoggingEventDataPtr.h \
+		/opt/spinnaker/include/LoggingEventData.h \
+		/opt/spinnaker/include/SystemPtr.h \
+		/opt/spinnaker/include/ImageProcessor.h \
+		/opt/spinnaker/include/Interface/IImageProcessor.h \
+		/opt/spinnaker/include/ImageStatistics.h \
+		/opt/spinnaker/include/Interface/IImageStatistics.h \
+		/opt/spinnaker/include/ImageList.h \
+		/opt/spinnaker/include/InterfaceEventHandler.h \
+		/opt/spinnaker/include/Interface/IInterfaceEventHandler.h \
+		/opt/spinnaker/include/DeviceArrivalEventHandler.h \
+		/opt/spinnaker/include/Interface/IDeviceArrivalEventHandler.h \
+		/opt/spinnaker/include/DeviceRemovalEventHandler.h \
+		/opt/spinnaker/include/Interface/IDeviceRemovalEventHandler.h \
+		/opt/spinnaker/include/DeviceEventHandler.h \
+		/opt/spinnaker/include/Interface/IDeviceEventHandler.h \
+		/opt/spinnaker/include/ImageEventHandler.h \
+		/opt/spinnaker/include/Interface/IImageEventHandler.h \
+		/opt/spinnaker/include/ImageListEventHandler.h \
+		/opt/spinnaker/include/Interface/IImageListEventHandler.h \
+		/opt/spinnaker/include/InterfaceArrivalEventHandler.h \
+		/opt/spinnaker/include/Interface/IInterfaceArrivalEventHandler.h \
+		/opt/spinnaker/include/InterfaceRemovalEventHandler.h \
+		/opt/spinnaker/include/Interface/IInterfaceRemovalEventHandler.h \
+		/opt/spinnaker/include/SystemEventHandler.h \
+		/opt/spinnaker/include/Interface/ISystemEventHandler.h \
+		/opt/spinnaker/include/DeviceEventUtility.h \
+		/opt/spinnaker/include/ImageUtility.h \
+		/opt/spinnaker/include/ImageUtilityCCM.h \
+		/opt/spinnaker/include/ImageUtilityHeatmap.h \
+		/opt/spinnaker/include/ImageUtilityPolarization.h \
+		../../../anaconda3/include/qt/QtGui/QImage \
+		../../../anaconda3/include/qt/QtGui/qimage.h \
+		../../../anaconda3/include/qt/QtGui/qtguiglobal.h \
+		../../../anaconda3/include/qt/QtCore/qglobal.h \
+		../../../anaconda3/include/qt/QtCore/qconfig-bootstrapped.h \
+		../../../anaconda3/include/qt/QtCore/qconfig.h \
+		../../../anaconda3/include/qt/QtCore/qtcore-config.h \
+		../../../anaconda3/include/qt/QtCore/qsystemdetection.h \
+		../../../anaconda3/include/qt/QtCore/qprocessordetection.h \
+		../../../anaconda3/include/qt/QtCore/qcompilerdetection.h \
+		../../../anaconda3/include/qt/QtCore/qtypeinfo.h \
+		../../../anaconda3/include/qt/QtCore/qsysinfo.h \
+		../../../anaconda3/include/qt/QtCore/qlogging.h \
+		../../../anaconda3/include/qt/QtCore/qflags.h \
+		../../../anaconda3/include/qt/QtCore/qatomic.h \
+		../../../anaconda3/include/qt/QtCore/qbasicatomic.h \
+		../../../anaconda3/include/qt/QtCore/qatomic_bootstrap.h \
+		../../../anaconda3/include/qt/QtCore/qgenericatomic.h \
+		../../../anaconda3/include/qt/QtCore/qatomic_cxx11.h \
+		../../../anaconda3/include/qt/QtCore/qatomic_msvc.h \
+		../../../anaconda3/include/qt/QtCore/qglobalstatic.h \
+		../../../anaconda3/include/qt/QtCore/qmutex.h \
+		../../../anaconda3/include/qt/QtCore/qnumeric.h \
+		../../../anaconda3/include/qt/QtCore/qversiontagging.h \
+		../../../anaconda3/include/qt/QtGui/qtgui-config.h \
+		../../../anaconda3/include/qt/QtGui/qcolor.h \
+		../../../anaconda3/include/qt/QtGui/qrgb.h \
+		../../../anaconda3/include/qt/QtCore/qnamespace.h \
+		../../../anaconda3/include/qt/QtCore/qstringlist.h \
+		../../../anaconda3/include/qt/QtCore/qlist.h \
+		../../../anaconda3/include/qt/QtCore/qalgorithms.h \
+		../../../anaconda3/include/qt/QtCore/qiterator.h \
+		../../../anaconda3/include/qt/QtCore/qrefcount.h \
+		../../../anaconda3/include/qt/QtCore/qarraydata.h \
+		../../../anaconda3/include/qt/QtCore/qhashfunctions.h \
+		../../../anaconda3/include/qt/QtCore/qstring.h \
+		../../../anaconda3/include/qt/QtCore/qchar.h \
+		../../../anaconda3/include/qt/QtCore/qbytearray.h \
+		../../../anaconda3/include/qt/QtCore/qstringliteral.h \
+		../../../anaconda3/include/qt/QtCore/qstringalgorithms.h \
+		../../../anaconda3/include/qt/QtCore/qstringview.h \
+		../../../anaconda3/include/qt/QtCore/qstringbuilder.h \
+		../../../anaconda3/include/qt/QtCore/qpair.h \
+		../../../anaconda3/include/qt/QtCore/qvector.h \
+		../../../anaconda3/include/qt/QtCore/qcontainertools_impl.h \
+		../../../anaconda3/include/qt/QtCore/qpoint.h \
+		../../../anaconda3/include/qt/QtCore/qbytearraylist.h \
+		../../../anaconda3/include/qt/QtCore/qregexp.h \
+		../../../anaconda3/include/qt/QtCore/qstringmatcher.h \
+		../../../anaconda3/include/qt/QtGui/qrgba64.h \
+		../../../anaconda3/include/qt/QtGui/qpaintdevice.h \
+		../../../anaconda3/include/qt/QtGui/qwindowdefs.h \
+		../../../anaconda3/include/qt/QtCore/qobjectdefs.h \
+		../../../anaconda3/include/qt/QtCore/qobjectdefs_impl.h \
+		../../../anaconda3/include/qt/QtGui/qwindowdefs_win.h \
+		../../../anaconda3/include/qt/QtCore/qrect.h \
+		../../../anaconda3/include/qt/QtCore/qmargins.h \
+		../../../anaconda3/include/qt/QtCore/qsize.h \
+		../../../anaconda3/include/qt/QtGui/qpixelformat.h \
+		../../../anaconda3/include/qt/QtGui/qtransform.h \
+		../../../anaconda3/include/qt/QtGui/qmatrix.h \
+		../../../anaconda3/include/qt/QtGui/qpolygon.h \
+		../../../anaconda3/include/qt/QtGui/qregion.h \
+		../../../anaconda3/include/qt/QtCore/qdatastream.h \
+		../../../anaconda3/include/qt/QtCore/qscopedpointer.h \
+		../../../anaconda3/include/qt/QtCore/qiodevice.h \
+		../../../anaconda3/include/qt/QtCore/qobject.h \
+		../../../anaconda3/include/qt/QtCore/qcoreevent.h \
+		../../../anaconda3/include/qt/QtCore/qmetatype.h \
+		../../../anaconda3/include/qt/QtCore/qvarlengtharray.h \
+		../../../anaconda3/include/qt/QtCore/qcontainerfwd.h \
+		../../../anaconda3/include/qt/QtCore/qobject_impl.h \
+		../../../anaconda3/include/qt/QtCore/qline.h \
+		src/cuda_functions.h \
+		../../../anaconda3/include/qt/QtWidgets/QWidget \
+		../../../anaconda3/include/qt/QtWidgets/qwidget.h \
+		../../../anaconda3/include/qt/QtWidgets/qtwidgetsglobal.h \
+		../../../anaconda3/include/qt/QtWidgets/qtwidgets-config.h \
+		../../../anaconda3/include/qt/QtGui/qpalette.h \
+		../../../anaconda3/include/qt/QtGui/qbrush.h \
+		../../../anaconda3/include/qt/QtGui/qpixmap.h \
+		../../../anaconda3/include/qt/QtCore/qsharedpointer.h \
+		../../../anaconda3/include/qt/QtCore/qshareddata.h \
+		../../../anaconda3/include/qt/QtCore/qhash.h \
+		../../../anaconda3/include/qt/QtCore/qsharedpointer_impl.h \
+		../../../anaconda3/include/qt/QtGui/qfont.h \
+		../../../anaconda3/include/qt/QtGui/qfontmetrics.h \
+		../../../anaconda3/include/qt/QtGui/qfontinfo.h \
+		../../../anaconda3/include/qt/QtWidgets/qsizepolicy.h \
+		../../../anaconda3/include/qt/QtGui/qcursor.h \
+		../../../anaconda3/include/qt/QtGui/qkeysequence.h \
+		../../../anaconda3/include/qt/QtGui/qevent.h \
+		../../../anaconda3/include/qt/QtCore/qvariant.h \
+		../../../anaconda3/include/qt/QtCore/qmap.h \
+		../../../anaconda3/include/qt/QtCore/qdebug.h \
+		../../../anaconda3/include/qt/QtCore/qtextstream.h \
+		../../../anaconda3/include/qt/QtCore/qlocale.h \
+		../../../anaconda3/include/qt/QtCore/qset.h \
+		../../../anaconda3/include/qt/QtCore/qcontiguouscache.h \
+		../../../anaconda3/include/qt/QtCore/qurl.h \
+		../../../anaconda3/include/qt/QtCore/qurlquery.h \
+		../../../anaconda3/include/qt/QtCore/qfile.h \
+		../../../anaconda3/include/qt/QtCore/qfiledevice.h \
+		../../../anaconda3/include/qt/QtGui/qvector2d.h \
+		../../../anaconda3/include/qt/QtGui/qtouchdevice.h \
+		../../../anaconda3/include/qt/QtWidgets/QPushButton \
+		../../../anaconda3/include/qt/QtWidgets/qpushbutton.h \
+		../../../anaconda3/include/qt/QtWidgets/qabstractbutton.h \
+		../../../anaconda3/include/qt/QtGui/qicon.h \
+		../../../anaconda3/include/qt/QtWidgets/QLineEdit \
+		../../../anaconda3/include/qt/QtWidgets/qlineedit.h \
+		../../../anaconda3/include/qt/QtWidgets/qframe.h \
+		../../../anaconda3/include/qt/QtGui/qtextcursor.h \
+		../../../anaconda3/include/qt/QtGui/qtextformat.h \
+		../../../anaconda3/include/qt/QtGui/qpen.h \
+		../../../anaconda3/include/qt/QtGui/qtextoption.h \
+		../../../anaconda3/include/qt/QtWidgets/QFileDialog \
+		../../../anaconda3/include/qt/QtWidgets/qfiledialog.h \
+		../../../anaconda3/include/qt/QtCore/qdir.h \
+		../../../anaconda3/include/qt/QtCore/qfileinfo.h \
+		../../../anaconda3/include/qt/QtWidgets/qdialog.h \
+		../../../anaconda3/include/qt/QtWidgets/QVBoxLayout \
+		../../../anaconda3/include/qt/QtWidgets/qboxlayout.h \
+		../../../anaconda3/include/qt/QtWidgets/qlayout.h \
+		../../../anaconda3/include/qt/QtWidgets/qlayoutitem.h \
+		../../../anaconda3/include/qt/QtWidgets/qgridlayout.h \
+		../../../anaconda3/include/qt/QtWidgets/QHBoxLayout \
+		../../../anaconda3/include/qt/QtCore/QDebug \
+		../../../anaconda3/include/qt/QtWidgets/QLabel \
+		../../../anaconda3/include/qt/QtWidgets/qlabel.h \
+		../../../anaconda3/include/qt/QtCore/QTimer \
+		../../../anaconda3/include/qt/QtCore/qtimer.h \
+		../../../anaconda3/include/qt/QtCore/qbasictimer.h \
+		../../../anaconda3/include/qt/QtConcurrent/QtConcurrent \
+		../../../anaconda3/include/qt/QtConcurrent/QtConcurrentDepends \
+		../../../anaconda3/include/qt/QtCore/QtCore \
+		../../../anaconda3/include/qt/QtCore/QtCoreDepends \
+		../../../anaconda3/include/qt/QtCore/qabstractanimation.h \
+		../../../anaconda3/include/qt/QtCore/qabstracteventdispatcher.h \
+		../../../anaconda3/include/qt/QtCore/qeventloop.h \
+		../../../anaconda3/include/qt/QtCore/qabstractitemmodel.h \
+		../../../anaconda3/include/qt/QtCore/qabstractnativeeventfilter.h \
+		../../../anaconda3/include/qt/QtCore/qabstractproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qabstractstate.h \
+		../../../anaconda3/include/qt/QtCore/qabstracttransition.h \
+		../../../anaconda3/include/qt/QtCore/qanimationgroup.h \
+		../../../anaconda3/include/qt/QtCore/qarraydataops.h \
+		../../../anaconda3/include/qt/QtCore/qarraydatapointer.h \
+		../../../anaconda3/include/qt/QtCore/qbitarray.h \
+		../../../anaconda3/include/qt/QtCore/qbuffer.h \
+		../../../anaconda3/include/qt/QtCore/qbytearraymatcher.h \
+		../../../anaconda3/include/qt/QtCore/qcache.h \
+		../../../anaconda3/include/qt/QtCore/qcalendar.h \
+		../../../anaconda3/include/qt/QtCore/qcborarray.h \
+		../../../anaconda3/include/qt/QtCore/qcborvalue.h \
+		../../../anaconda3/include/qt/QtCore/qdatetime.h \
+		../../../anaconda3/include/qt/QtCore/qcborcommon.h \
+		../../../anaconda3/include/qt/QtCore/qregularexpression.h \
+		../../../anaconda3/include/qt/QtCore/quuid.h \
+		../../../anaconda3/include/qt/QtCore/qcbormap.h \
+		../../../anaconda3/include/qt/QtCore/qcborstream.h \
+		../../../anaconda3/include/qt/QtCore/qcborstreamreader.h \
+		../../../anaconda3/include/qt/QtCore/qfloat16.h \
+		../../../anaconda3/include/qt/QtCore/qcborstreamwriter.h \
+		../../../anaconda3/include/qt/QtCore/qcollator.h \
+		../../../anaconda3/include/qt/QtCore/qcommandlineoption.h \
+		../../../anaconda3/include/qt/QtCore/qcommandlineparser.h \
+		../../../anaconda3/include/qt/QtCore/qcoreapplication.h \
+		../../../anaconda3/include/qt/QtCore/qconcatenatetablesproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qcryptographichash.h \
+		../../../anaconda3/include/qt/QtCore/qdeadlinetimer.h \
+		../../../anaconda3/include/qt/QtCore/qelapsedtimer.h \
+		../../../anaconda3/include/qt/QtCore/qdiriterator.h \
+		../../../anaconda3/include/qt/QtCore/qeasingcurve.h \
+		../../../anaconda3/include/qt/QtCore/qendian.h \
+		../../../anaconda3/include/qt/QtCore/qeventtransition.h \
+		../../../anaconda3/include/qt/QtCore/qexception.h \
+		../../../anaconda3/include/qt/QtCore/qfactoryinterface.h \
+		../../../anaconda3/include/qt/QtCore/qfileselector.h \
+		../../../anaconda3/include/qt/QtCore/QObject \
+		../../../anaconda3/include/qt/QtCore/QStringList \
+		../../../anaconda3/include/qt/QtCore/qfilesystemwatcher.h \
+		../../../anaconda3/include/qt/QtCore/qfinalstate.h \
+		../../../anaconda3/include/qt/QtCore/qfuture.h \
+		../../../anaconda3/include/qt/QtCore/qfutureinterface.h \
+		../../../anaconda3/include/qt/QtCore/qrunnable.h \
+		../../../anaconda3/include/qt/QtCore/qresultstore.h \
+		../../../anaconda3/include/qt/QtCore/qfuturesynchronizer.h \
+		../../../anaconda3/include/qt/QtCore/qfuturewatcher.h \
+		../../../anaconda3/include/qt/QtCore/qhistorystate.h \
+		../../../anaconda3/include/qt/QtCore/qidentityproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qisenum.h \
+		../../../anaconda3/include/qt/QtCore/qitemselectionmodel.h \
+		../../../anaconda3/include/qt/QtCore/qjsonarray.h \
+		../../../anaconda3/include/qt/QtCore/qjsonvalue.h \
+		../../../anaconda3/include/qt/QtCore/qjsondocument.h \
+		../../../anaconda3/include/qt/QtCore/qjsonobject.h \
+		../../../anaconda3/include/qt/QtCore/qlibrary.h \
+		../../../anaconda3/include/qt/QtCore/qlibraryinfo.h \
+		../../../anaconda3/include/qt/QtCore/qversionnumber.h \
+		../../../anaconda3/include/qt/QtCore/qlinkedlist.h \
+		../../../anaconda3/include/qt/QtCore/qlockfile.h \
+		../../../anaconda3/include/qt/QtCore/qloggingcategory.h \
+		../../../anaconda3/include/qt/QtCore/qmath.h \
+		../../../anaconda3/include/qt/QtCore/qmessageauthenticationcode.h \
+		../../../anaconda3/include/qt/QtCore/qmetaobject.h \
+		../../../anaconda3/include/qt/QtCore/qmimedata.h \
+		../../../anaconda3/include/qt/QtCore/qmimedatabase.h \
+		../../../anaconda3/include/qt/QtCore/qmimetype.h \
+		../../../anaconda3/include/qt/QtCore/qobjectcleanuphandler.h \
+		../../../anaconda3/include/qt/QtCore/qoperatingsystemversion.h \
+		../../../anaconda3/include/qt/QtCore/qparallelanimationgroup.h \
+		../../../anaconda3/include/qt/QtCore/qpauseanimation.h \
+		../../../anaconda3/include/qt/QtCore/qplugin.h \
+		../../../anaconda3/include/qt/QtCore/qpointer.h \
+		../../../anaconda3/include/qt/QtCore/qpluginloader.h \
+		../../../anaconda3/include/qt/QtCore/qprocess.h \
+		../../../anaconda3/include/qt/QtCore/qpropertyanimation.h \
+		../../../anaconda3/include/qt/QtCore/qvariantanimation.h \
+		../../../anaconda3/include/qt/QtCore/qqueue.h \
+		../../../anaconda3/include/qt/QtCore/qrandom.h \
+		../../../anaconda3/include/qt/QtCore/qreadwritelock.h \
+		../../../anaconda3/include/qt/QtCore/qresource.h \
+		../../../anaconda3/include/qt/QtCore/qsavefile.h \
+		../../../anaconda3/include/qt/QtCore/qscopedvaluerollback.h \
+		../../../anaconda3/include/qt/QtCore/qscopeguard.h \
+		../../../anaconda3/include/qt/QtCore/qsemaphore.h \
+		../../../anaconda3/include/qt/QtCore/qsequentialanimationgroup.h \
+		../../../anaconda3/include/qt/QtCore/qsettings.h \
+		../../../anaconda3/include/qt/QtCore/qsharedmemory.h \
+		../../../anaconda3/include/qt/QtCore/qsignalmapper.h \
+		../../../anaconda3/include/qt/QtCore/qsignaltransition.h \
+		../../../anaconda3/include/qt/QtCore/qsocketnotifier.h \
+		../../../anaconda3/include/qt/QtCore/qsortfilterproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qstack.h \
+		../../../anaconda3/include/qt/QtCore/qstandardpaths.h \
+		../../../anaconda3/include/qt/QtCore/qstate.h \
+		../../../anaconda3/include/qt/QtCore/qstatemachine.h \
+		../../../anaconda3/include/qt/QtCore/qstorageinfo.h \
+		../../../anaconda3/include/qt/QtCore/qstringlistmodel.h \
+		../../../anaconda3/include/qt/QtCore/qsystemsemaphore.h \
+		../../../anaconda3/include/qt/QtCore/qtemporarydir.h \
+		../../../anaconda3/include/qt/QtCore/qtemporaryfile.h \
+		../../../anaconda3/include/qt/QtCore/qtextboundaryfinder.h \
+		../../../anaconda3/include/qt/QtCore/qtextcodec.h \
+		../../../anaconda3/include/qt/QtCore/qthread.h \
+		../../../anaconda3/include/qt/QtCore/qthreadpool.h \
+		../../../anaconda3/include/qt/QtCore/qthreadstorage.h \
+		../../../anaconda3/include/qt/QtCore/qtimeline.h \
+		../../../anaconda3/include/qt/QtCore/qtimezone.h \
+		../../../anaconda3/include/qt/QtCore/qtranslator.h \
+		../../../anaconda3/include/qt/QtCore/qtransposeproxymodel.h \
+		../../../anaconda3/include/qt/QtCore/qtypetraits.h \
+		../../../anaconda3/include/qt/QtCore/qwaitcondition.h \
+		../../../anaconda3/include/qt/QtCore/QDeadlineTimer \
+		../../../anaconda3/include/qt/QtCore/qwineventnotifier.h \
+		../../../anaconda3/include/qt/QtCore/qxmlstream.h \
+		../../../anaconda3/include/qt/QtCore/qtcoreversion.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentcompilertest.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrent_global.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentexception.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentfilter.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentfilterkernel.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentiteratekernel.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentmedian.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentthreadengine.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentmapkernel.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentreducekernel.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentfunctionwrappers.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentmap.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentrun.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentrunbase.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentstoredfunctioncall.h \
+		../../../anaconda3/include/qt/QtConcurrent/qtconcurrentversion.h \
+		../../../anaconda3/include/qt/QtWidgets/QMessageBox \
+		../../../anaconda3/include/qt/QtWidgets/qmessagebox.h \
+		../../../anaconda3/include/qt/QtWidgets/QApplication \
+		../../../anaconda3/include/qt/QtWidgets/qapplication.h \
+		../../../anaconda3/include/qt/QtWidgets/qdesktopwidget.h \
+		../../../anaconda3/include/qt/QtGui/qguiapplication.h \
+		../../../anaconda3/include/qt/QtGui/qinputmethod.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
+
+obj/moc_appwindow.o: moc/moc_appwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_appwindow.o moc/moc_appwindow.cpp
+
+####### Install
+
+install:  FORCE
+
+uninstall:  FORCE
+
+FORCE:
+
+
+```
+
+### src/main.cpp
+
+```
+#include "appwindow.h"
+#include "camerahandler.h"
+#include <QApplication>
+#include <QMessageBox>
+
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+
+    try {
+        CameraHandler cameraHandler;
+        AppWindow window(cameraHandler);
+        window.show();
+        return app.exec();
+    } catch (const std::runtime_error& e) {
+        QMessageBox::critical(nullptr, "Error", e.what());
+        return 1;
+    } catch (const Spinnaker::Exception& e) {
+        QMessageBox::critical(nullptr, "Error", e.what());
+        return 1;
+    } catch (...) {
+        QMessageBox::critical(nullptr, "Error", "Unknown error.");
+        return 1;
+    }
+}
+```
+
+### src/cuda_functions.h
+
+```
+#pragma once
+#include <tuple>
+#include <stdint.h>
+
+extern "C" std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size);
+```
+
+### src/camerahandler.h
+
+```
+#ifndef CAMERAHANDLER_H
+#define CAMERAHANDLER_H
+
+#include "Spinnaker.h"
+#include <QImage>
+
+class CameraHandler {
+public:
+    CameraHandler() {
+        system = Spinnaker::System::GetInstance();
+        camList = system->GetCameras();
+        if (camList.GetSize() == 0) {
+            camList.Clear();
+            system->ReleaseInstance();
+            throw std::runtime_error("No cameras found.");
+        }
+        pCam = camList.GetByIndex(0);
+        pCam->Init();
+        pCam->BeginAcquisition();
+        pCam->EndAcquisition();
+        pCam->BeginAcquisition();
+    }
+
+    ~CameraHandler() {
+        pCam->EndAcquisition();
+        pCam = nullptr;
+        camList.Clear();
+        system->ReleaseInstance();
+    }
+
+    QImage captureImage() {
+        Spinnaker::ImagePtr pResultImage = pCam->GetNextImage();
+        const size_t width = pResultImage->GetWidth();
+        const size_t height = pResultImage->GetHeight();
+        const size_t stride = pResultImage->GetStride();
+        Spinnaker::PixelFormatEnums pixelFormat = pResultImage->GetPixelFormat();
+        const unsigned char *imageData = static_cast<const unsigned char*>(pResultImage->GetData());
+
+        QImage image;
+        if (pixelFormat == Spinnaker::PixelFormat_Mono8)
+        {
+            image = QImage(imageData, width, height, stride, QImage::Format_Grayscale8);
+            return image;
+        }
+        else if (pixelFormat == Spinnaker::PixelFormat_RGB8)
+        {
+            image = QImage(imageData, width, height, stride, QImage::Format_RGB888);
+            return image;
+        }else
+        {
+            image = QImage(width, height, QImage::Format_RGB888);
+            return image;
+        }
+    }
+
+    double getFrameRate() {
+        return pCam->AcquisitionFrameRate.GetValue();
+    }
+
+    int getWidth() {
+        return pCam->Width.GetValue();
+    }
+
+    int getHeight() {
+        return pCam->Height.GetValue();
+    }
+
+    void saveImage(const QImage& image, const QString& directory, int& imageCount) {
+        QString filename = QString("%1/%2.bmp").arg(directory).arg(imageCount++, 6, 10, QLatin1Char('0'));
+        image.save(filename);
+    }
+
+    void stopAcquisition() {
+        pCam->EndAcquisition();
+    }
+
+    void startAcquisition() {
+        pCam->BeginAcquisition();
+    }
+
+private:
+    Spinnaker::SystemPtr system;
+    Spinnaker::CameraList camList;
+    Spinnaker::CameraPtr pCam;
+};
+
+#endif // CAMERAHANDLER_H
+```
+
+### src/cuda_functions.cu
+
+```
+#include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
+#include <thrust/reduce.h>
+#include <thrust/functional.h>
+#include <thrust/transform_reduce.h>
+#include <tuple>
+
+#ifdef __x86_64__
+extern "C" std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size) {
+    thrust::device_vector<uint8_t> d_data(size);
+    cudaMemcpy(thrust::raw_pointer_cast(d_data.data()), data, size * sizeof(uint8_t), cudaMemcpyHostToDevice);
+
+    float mean = static_cast<float>(thrust::reduce(d_data.begin(), d_data.end(), 0, thrust::plus<int>())) / size;
+
+    thrust::device_vector<float> d_diff(size);
+    thrust::transform(d_data.begin(), d_data.end(), d_diff.begin(),
+                      [mean] __device__ (uint8_t val) { return (static_cast<float>(val) - mean) * (static_cast<float>(val) - mean); });
+
+    float variance = thrust::reduce(d_diff.begin(), d_diff.end(), 0.0f, thrust::plus<float>()) / size;
+    float stdDev = sqrtf(variance);
+
+    float k = stdDev / mean;
+
+    return std::make_tuple(mean, stdDev, k);
+}
+#elif __aarch64__
+extern "C" std::tuple<float, float, float> calculateMeanStdDevK(uint8_t* data, int size) {
+    float mean = static_cast<float>(thrust::reduce(thrust::device, data, data + size, 0, thrust::plus<int>())) / size;
+
+    thrust::device_vector<float> d_diff(size);
+    thrust::transform(thrust::device, data, data + size, d_diff.begin(),
+                      [mean] __device__ (uint8_t val) { return (static_cast<float>(val) - mean) * (static_cast<float>(val) - mean); });
+
+    float variance = thrust::reduce(d_diff.begin(), d_diff.end(), 0.0f, thrust::plus<float>()) / size;
+    float stdDev = sqrtf(variance);
+
+    float k = stdDev / mean;
+
+    return std::make_tuple(mean, stdDev, k);
+}
+#else
+#error "Unsupported architecture"
+#endif
+```
+
+### src/appwindow.h
+
+```
+#ifndef APPWINDOW_H
+#define APPWINDOW_H
+
+#include "camerahandler.h"
+#include "cuda_functions.h"
+
+#include <QWidget>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QFileDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QDebug>
+#include <QLabel>
+#include <QTimer>
+#include <QtConcurrent>
+#include <QMessageBox>
+
+class AppWindow : public QWidget {
+    Q_OBJECT
+
+public:
+    AppWindow(CameraHandler& cameraHandler, QWidget *parent = nullptr)
+    : QWidget(parent), cameraHandler(cameraHandler) {
+        setupUI();
+        startCamera();
+    }
+
+    ~AppWindow() {
+        delete imageData;
+    }
+
+private slots:
+    void onBrowseButtonClicked() {
+        try
+        {
+            timer->stop();
+            cameraHandler.stopAcquisition();
+        }
+        catch(const std::exception& e)
+        {
+            QMessageBox::critical(this, "Error", e.what());
+        }
+        
+        QString directory = QFileDialog::getExistingDirectory(this, "Select Directory");
+        if (!directory.isEmpty()) {
+            pathLineEdit->setText(directory);
+        }
+
+        try
+        {
+            timer->start(1000 / cameraHandler.getFrameRate());
+            cameraHandler.startAcquisition();
+        }
+        catch(const std::exception& e)
+        {
+            QMessageBox::critical(this, "Error", e.what());
+        }
+    }
+
+    void onRecordButtonToggled(bool checked) {
+        if (checked) {
+            if (pathLineEdit->text().isEmpty()) {
+                QMessageBox::critical(this, "Error", "Please select directory to save images.");
+                recordButton->setChecked(false);
+                return;
+            }
+
+            recordButton->setText("Stop");
+            recording = true;
+            imageCount = 0;
+        } else {
+            recordButton->setText("REC");
+            recording = false;
+        }
+    }
+
+    void updateImage() {
+        QImage image = cameraHandler.captureImage();
+        auto now = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastUpdateTime).count();
+        lastUpdateTime = now;
+        double fps = 1000.0 / elapsed;
+        fpsLabel -> setText(QString("FPS: %1").arg(fps, 0, 'f', 2));
+        if (!image.isNull()) {
+            imageView->setPixmap(QPixmap::fromImage(image));
+            if (recording) {
+                QtConcurrent::run(&cameraHandler, &CameraHandler::saveImage, image, pathLineEdit->text(), std::ref(imageCount));
+            }
+            memcpy(imageData, image.bits(), cameraHandler.getWidth() * cameraHandler.getHeight());
+            auto [mean, stddev, kurtosis] = calculateMeanStdDevK(imageData, cameraHandler.getWidth() * cameraHandler.getHeight());
+            qDebug() << "Mean: " << mean << ", StdDev: " << stddev << ", Kurtosis: " << kurtosis;
+            
+        }
+    }
+
+private:
+    QPushButton *recordButton;
+    QLineEdit *pathLineEdit;
+    QLabel *imageView;
+    CameraHandler& cameraHandler;
+    QTimer *timer;
+    QLabel *fpsLabel;
+    std::chrono::high_resolution_clock::time_point lastUpdateTime = std::chrono::high_resolution_clock::now();
+    uint8_t* imageData;
+
+    bool recording = false;
+    int imageCount = 0;
+
+    void setupUI() {
+        recordButton = new QPushButton("REC");
+        recordButton->setCheckable(true);
+
+        pathLineEdit = new QLineEdit();
+        pathLineEdit->setPlaceholderText("Save at: ");
+
+        QPushButton *browseButton = new QPushButton("Browse");
+
+        imageView = new QLabel();
+        imageView->setMinimumSize(640, 480);
+        imageView->setAlignment(Qt::AlignCenter);
+        imageView->setStyleSheet("QLabel { background-color: white; }");
+
+        QHBoxLayout *topLayout = new QHBoxLayout;
+        topLayout->addWidget(recordButton);
+        topLayout->addWidget(pathLineEdit);
+        topLayout->addWidget(browseButton);
+
+        QVBoxLayout *mainLayout = new QVBoxLayout(this);
+        mainLayout->addLayout(topLayout);
+        mainLayout->addWidget(imageView);
+
+        connect(browseButton, &QPushButton::clicked, this, &AppWindow::onBrowseButtonClicked);
+        connect(recordButton, &QPushButton::toggled, this, &AppWindow::onRecordButtonToggled);
+
+        // 画像更新用のタイマーを設定
+        timer = new QTimer(this);
+        connect(timer, &QTimer::timeout, this, &AppWindow::updateImage);
+
+        fpsLabel = new QLabel(this);
+        fpsLabel -> setAlignment(Qt::AlignCenter);
+        mainLayout -> addWidget(fpsLabel);
+
+        imageData = new uint8_t[cameraHandler.getWidth() * cameraHandler.getHeight()];
+
+    }
+
+    void startCamera() {
+        double frameRate = cameraHandler.getFrameRate();
+        int interval = static_cast<int>(1000.0 / frameRate); // フレームレートをミリ秒に変換
+        timer->start(interval);
+    }
+};
+
+#endif // APPWINDOW_H
+```
+
+### README.md
+
+```
+# JetsonCamApp
+
+FLIRカメラからSpinnnaker SDKを用いて画像取得し、所望の処理を経てデータを保存するJetson nano用QtベースのGUIアプリです。
+
+This is a Qt-based GUI application for the Jetson nano that acquires images from a FLIR camera using the Spinnaker SDK and stores the data after the desired processing.
+
+## 動作、ビルド環境の構築
+
+QtとSpinnaker SDKをインストールし、```qmake``` とC++コンパイラのパスが通っている状態にしてください。C++コンパイラのインストール手順はQtのインストール手順に含まれます。
+
+## リポジトリのクローン Clone this repository
+
+このリポジトリをクローンしてローカルに保存します。
+
+```
+git clone https://github.com/dainakai/jetsonCamApp.git
+```
+
+## ビルド Build
+
+アプリをビルドします。
+
+```
+cd path/to/jetsonCamApp
+sh ./Allclean.sh
+qmake
+make
+```
+
+アーキテクチャごとに ```Makefile``` は異なります。このアプリに固有の設定はSpinnaker SDKのインストールディレクトリです。エラーが出る場合は ```build.pro``` を編集してください 。```Allclean.sh``` はビルドファイルや一時ファイルを削除します。
+
+## アプリの実行 Execute the app 
+
+アプリ実行の前にSpinViewでカメラ設定を行ってください。カメラの設定は内部に保存されます。保存された設定はカメラの電源が切れるとリセットされます。
+```
+
