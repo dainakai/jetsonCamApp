@@ -148,6 +148,22 @@ private:
     std::vector<float> meanData;
     std::vector<float> stddevData;
     std::vector<float> kData;
+
+    QChartView *trendChartView;
+    QLineSeries *trendMeanSeries;
+    QLineSeries *trendStddevSeries;
+    QLineSeries *trendKSeries;
+    QValueAxis *trendAxisX;
+    QValueAxis *trendAxisY;
+    // std::vector<float> trendMeanData;
+    // std::vector<float> trendStddevData;
+    // std::vector<float> trendKData;
+    float trendMean = 0;
+    float trendStddev = 0;
+    float trendK = 0;
+
+    const int trendInterval = 30;
+
     int Width = cameraHandler.getWidth();
     int Height = cameraHandler.getHeight();
     int frameCount = 0;
@@ -240,6 +256,38 @@ private:
 
         connect(browseButtonforGraph, &QPushButton::clicked, this, &AppWindow::onBrowseGraphButtonClicked);
 
+        // トレンドグラフの初期化
+        trendChartView = new QChartView();
+        trendChartView->setMinimumSize(400,300);
+        QChart *trendChart = new QChart();
+        trendChartView -> setChart(trendChart);
+
+        trendMeanSeries = new QLineSeries();
+        trendStddevSeries = new QLineSeries();
+        trendKSeries = new QLineSeries();
+
+        trendMeanSeries -> setName("Mean");
+        trendStddevSeries -> setName("StdDev");
+        trendKSeries -> setName("K = StdDev/Mean");
+
+        trendChart -> addSeries(trendMeanSeries);
+        trendChart -> addSeries(trendStddevSeries);
+        trendChart -> addSeries(trendKSeries);
+        
+        trendAxisX = new QValueAxis();
+        trendAxisY = new QValueAxis();
+        trendChart -> addAxis(trendAxisX, Qt::AlignBottom);
+        trendChart -> addAxis(trendAxisY, Qt::AlignLeft);
+
+        trendMeanSeries -> attachAxis(trendAxisX);
+        trendMeanSeries -> attachAxis(trendAxisY);
+        trendStddevSeries -> attachAxis(trendAxisX);
+        trendStddevSeries -> attachAxis(trendAxisY);
+        trendKSeries -> attachAxis(trendAxisX);
+        trendKSeries -> attachAxis(trendAxisY);
+
+        windowLayout -> addWidget(trendChartView);
+
     }
 
     void startCamera() {
@@ -265,6 +313,21 @@ private:
         meanData.push_back(mean/255.0);
         stddevData.push_back(stddev/255.0);
         kData.push_back(kurtosis);
+
+        if (frameNumber % trendInterval != 0) {
+            trendMean += mean/255.0;
+            trendStddev += stddev/255.0;
+            trendK += kurtosis;
+        }else{
+            trendMeanSeries->append(frameNumber, trendMean/trendInterval);
+            trendStddevSeries->append(frameNumber, trendStddev/trendInterval);
+            trendKSeries->append(frameNumber, trendK/trendInterval);
+            trendAxisX->setRange(0, frameNumber);
+            trendAxisY->setRange(0, 1.0);
+            trendMean = 0;
+            trendStddev = 0;
+            trendK = 0;
+        }
     }
 
     void saveGraphData() {
