@@ -1,3 +1,11 @@
 Makefile
 .qmake.stash
 moc/
+.vscode/
+.git/
+obj/
+Makefile
+README.md
+graph_data.csv
+Allclean.sh
+CUDAbuild.sh
