@@ -3,6 +3,7 @@
 
 #include "Spinnaker.h"
 #include <QImage>
+#include <tuple>
 
 class CameraHandler {
 public:
@@ -17,6 +18,7 @@ public:
         pCam = camList.GetByIndex(0);
         pCam->Init();
         pCam->BeginAcquisition();
+        inittimestamp = pCam->GetNextImage()->GetTimeStamp();
         pCam->EndAcquisition();
         pCam->BeginAcquisition();
     }
@@ -28,28 +30,67 @@ public:
         system->ReleaseInstance();
     }
 
-    QImage captureImage() {
-        Spinnaker::ImagePtr pResultImage = pCam->GetNextImage();
-        const size_t width = pResultImage->GetWidth();
-        const size_t height = pResultImage->GetHeight();
-        const size_t stride = pResultImage->GetStride();
-        Spinnaker::PixelFormatEnums pixelFormat = pResultImage->GetPixelFormat();
-        const unsigned char *imageData = static_cast<const unsigned char*>(pResultImage->GetData());
+    std::tuple<QImage, double, double> captureImage() {
+        Spinnaker::ImagePtr pResultImage = nullptr;
+        try
+        {
+            pResultImage = pCam->GetNextImage(1000);
+            if (pResultImage->IsIncomplete())
+            {
+                std::cerr << "Image incomplete with image status " << pResultImage->GetImageStatus() << std::endl;
+                std::cerr << "Image time stamp: " << pResultImage->GetTimeStamp() << std::endl;
+                std::cerr << "Device temperature: " << pCam->DeviceTemperature.GetValue() << std::endl;
+                std::cout << std::endl << std::endl;
+                pResultImage->Release();
+                return std::make_tuple(QImage(), 0, 0);
+            }
+            double temp = pCam->DeviceTemperature.GetValue();
+            const size_t width = pResultImage->GetWidth();
+            const size_t height = pResultImage->GetHeight();
+            const size_t stride = pResultImage->GetStride();
+            const double timestamp = (pResultImage->GetTimeStamp() - inittimestamp)/1000000000.0;
+            Spinnaker::PixelFormatEnums pixelFormat = pResultImage->GetPixelFormat();
+            const unsigned char *imageData = static_cast<const unsigned char*>(pResultImage->GetData());
 
-        QImage image;
-        if (pixelFormat == Spinnaker::PixelFormat_Mono8)
-        {
-            image = QImage(imageData, width, height, stride, QImage::Format_Grayscale8);
-            return image;
+            QImage image;
+            if (pixelFormat == Spinnaker::PixelFormat_Mono8)
+            {
+                image = QImage(imageData, width, height, stride, QImage::Format_Grayscale8);
+                pResultImage->Release();
+                return std::make_tuple(image, timestamp, temp);
+            }
+            else
+            {
+                pResultImage->Release();
+                throw std::runtime_error("Unsupported pixel format. Only Mono8 is supported. Please change the pixel format in SpinView.");
+            }
         }
-        else if (pixelFormat == Spinnaker::PixelFormat_RGB8)
+        catch (Spinnaker::Exception& e)
         {
-            image = QImage(imageData, width, height, stride, QImage::Format_RGB888);
-            return image;
-        }else
+            if (pResultImage != nullptr && !pResultImage->IsIncomplete())
+            {
+                pResultImage->Release();
+            }
+            std::cerr << "Error: " << e.what() << std::endl;
+            return std::make_tuple(QImage(), 0, 0);
+        }
+        catch (std::exception& e)
         {
-            image = QImage(width, height, QImage::Format_RGB888);
-            return image;
+            if (pResultImage != nullptr && !pResultImage->IsIncomplete())
+            {
+                pResultImage->Release();
+            }
+            std::cerr << "Error: " << e.what() << std::endl;
+            return std::make_tuple(QImage(), 0, 0);
+        }
+        catch (...)
+        {
+            if (pResultImage != nullptr && !pResultImage->IsIncomplete())
+            {
+                pResultImage->Release();
+            }
+            std::cerr << "Unknown error." << std::endl;
+            return std::make_tuple(QImage(), 0, 0);
         }
     }
 
@@ -82,6 +123,7 @@ private:
     Spinnaker::SystemPtr system;
     Spinnaker::CameraList camList;
     Spinnaker::CameraPtr pCam;
+    uint64_t inittimestamp;
 };
 
 #endif // CAMERAHANDLER_H

@@ -1,3 +1,232 @@
+# src
+
+## Directory Structure
+
+- src/
+  - main.cpp
+  - camerahandler.h
+  - cuda_functions.cu
+  - cuda_functions.h
+  - appwindow.h
+
+## File Contents
+
+### main.cpp
+
+```
+#include "appwindow.h"
+#include "camerahandler.h"
+#include <QApplication>
+#include <QMessageBox>
+
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+
+    try {
+        CameraHandler cameraHandler;
+        AppWindow window(cameraHandler);
+        window.show();
+        return app.exec();
+    } catch (const std::runtime_error& e) {
+        std::cerr << "Runtime error: " << e.what() << std::endl;
+        QMessageBox::critical(nullptr, "Error", e.what());
+        return 1;
+    } catch (const Spinnaker::Exception& e) {
+        std::cerr << "Spinnaker error: " << e.what() << std::endl;
+        QMessageBox::critical(nullptr, "Error", e.what());
+        return 1;
+    } catch (...) {
+        std::cerr << "Unknown error." << std::endl;
+        QMessageBox::critical(nullptr, "Error", "Unknown error.");
+        return 1;
+    }
+}
+```
+
+### camerahandler.h
+
+```
+#ifndef CAMERAHANDLER_H
+#define CAMERAHANDLER_H
+
+#include "Spinnaker.h"
+#include <QImage>
+#include <tuple>
+
+class CameraHandler {
+public:
+    CameraHandler() {
+        system = Spinnaker::System::GetInstance();
+        camList = system->GetCameras();
+        if (camList.GetSize() == 0) {
+            camList.Clear();
+            system->ReleaseInstance();
+            throw std::runtime_error("No cameras found.");
+        }
+        pCam = camList.GetByIndex(0);
+        pCam->Init();
+        pCam->BeginAcquisition();
+        inittimestamp = pCam->GetNextImage()->GetTimeStamp();
+        pCam->EndAcquisition();
+        pCam->BeginAcquisition();
+    }
+
+    ~CameraHandler() {
+        pCam->EndAcquisition();
+        pCam = nullptr;
+        camList.Clear();
+        system->ReleaseInstance();
+    }
+
+    std::tuple<QImage, double, double> captureImage() {
+        try
+        {
+            Spinnaker::ImagePtr pResultImage = pCam->GetNextImage(1000);
+            if (pResultImage->IsIncomplete())
+            {
+                std::cerr << "Image incomplete with image status " << pResultImage->GetImageStatus() << std::endl;
+                std::cerr << "Image time stamp: " << pResultImage->GetTimeStamp() << std::endl;
+                std::cerr << "Device temperature: " << pCam->DeviceTemperature.GetValue() << std::endl;
+                std::cout << std::endl << std::endl;
+                pResultImage->Release();
+                return std::make_tuple(QImage(), 0, 0);
+            }
+            double temp = pCam->DeviceTemperature.GetValue();
+            const size_t width = pResultImage->GetWidth();
+            const size_t height = pResultImage->GetHeight();
+            const size_t stride = pResultImage->GetStride();
+            const double timestamp = (pResultImage->GetTimeStamp() - inittimestamp)/1000000000.0;
+            Spinnaker::PixelFormatEnums pixelFormat = pResultImage->GetPixelFormat();
+            const unsigned char *imageData = static_cast<const unsigned char*>(pResultImage->GetData());
+
+            QImage image;
+            if (pixelFormat == Spinnaker::PixelFormat_Mono8)
+            {
+                image = QImage(imageData, width, height, stride, QImage::Format_Grayscale8);
+                return std::make_tuple(image, timestamp, temp);
+            }
+            else
+            {
+                throw std::runtime_error("Unsupported pixel format. Only Mono8 is supported. Please change the pixel format in SpinView.");
+            }
+        }
+        catch (Spinnaker::Exception& e)
+        {
+            std::cerr << "Error: " << e.what() << std::endl;
+            return std::make_tuple(QImage(), 0, 0);
+        }
+        catch (std::exception& e)
+        {
+            std::cerr << "Error: " << e.what() << std::endl;
+            return std::make_tuple(QImage(), 0, 0);
+        }
+        catch (...)
+        {
+            std::cerr << "Unknown error." << std::endl;
+            return std::make_tuple(QImage(), 0, 0);
+        }
+    }
+
+    double getFrameRate() {
+        return pCam->AcquisitionFrameRate.GetValue();
+    }
+
+    int getWidth() {
+        return pCam->Width.GetValue();
+    }
+
+    int getHeight() {
+        return pCam->Height.GetValue();
+    }
+
+    void saveImage(const QImage& image, const QString& directory, int imageCount) {
+        QString filename = QString("%1/%2.bmp").arg(directory).arg(imageCount, 6, 10, QLatin1Char('0'));
+        image.save(filename);
+    }
+
+    void stopAcquisition() {
+        pCam->EndAcquisition();
+    }
+
+    void startAcquisition() {
+        pCam->BeginAcquisition();
+    }
+
+private:
+    Spinnaker::SystemPtr system;
+    Spinnaker::CameraList camList;
+    Spinnaker::CameraPtr pCam;
+    uint64_t inittimestamp;
+};
+
+#endif // CAMERAHANDLER_H
+```
+
+### cuda_functions.cu
+
+```
+#include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
+#include <thrust/universal_vector.h>
+#include <thrust/reduce.h>
+#include <thrust/functional.h>
+#include <thrust/transform_reduce.h>
+#include <tuple>
+
+#ifdef __x86_64__
+extern "C" std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size) {
+    thrust::device_vector<uint8_t> d_data(size);
+    thrust::copy(data, data + size, d_data.begin());
+
+    float mean = static_cast<float>(thrust::reduce(d_data.begin(), d_data.end(), 0, thrust::plus<int>())) / size;
+
+    thrust::device_vector<float> d_diff(size);
+    thrust::transform(d_data.begin(), d_data.end(), d_diff.begin(),
+                      [mean] __device__ (uint8_t val) { return (static_cast<float>(val) - mean) * (static_cast<float>(val) - mean); });
+
+    float variance = thrust::reduce(d_diff.begin(), d_diff.end(), 0.0f, thrust::plus<float>()) / size;
+    float stdDev = sqrtf(variance);
+
+    float k = stdDev / mean;
+
+    return std::make_tuple(mean, stdDev, k);
+}
+#elif __aarch64__
+extern "C" std::tuple<float, float, float> calculateMeanStdDevK(uint8_t* data, int size) {
+    thrust::universal_vector<uint8_t> d_data(size);
+    thrust::copy(data, data + size, d_data.begin());
+
+    float mean = static_cast<float>(thrust::reduce(d_data.begin(), d_data.end(), 0, thrust::plus<int>())) / size;
+
+    thrust::device_vector<float> d_diff(size);
+    thrust::transform(d_data.begin(), d_data.end(), d_diff.begin(),
+                      [mean] __device__ (uint8_t val) { return (static_cast<float>(val) - mean) * (static_cast<float>(val) - mean); });
+
+    float variance = thrust::reduce(d_diff.begin(), d_diff.end(), 0.0f, thrust::plus<float>()) / size;
+    float stdDev = sqrtf(variance);
+
+    float k = stdDev / mean;
+
+    return std::make_tuple(mean, stdDev, k);
+}
+#else
+#error "Unsupported architecture"
+#endif
+```
+
+### cuda_functions.h
+
+```
+#pragma once
+#include <tuple>
+#include <stdint.h>
+
+extern "C" std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size);
+```
+
+### appwindow.h
+
+```
 #ifndef APPWINDOW_H
 #define APPWINDOW_H
 
@@ -416,3 +645,5 @@ private:
 };
 
 #endif // APPWINDOW_H
+```
+
