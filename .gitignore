@@ -6,3 +6,6 @@ graph_data.csv
 backup/
 moc/
 obj/
+.qmake.stash
+Makefile
+jetsonCamApp
