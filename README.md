@@ -6,7 +6,7 @@ This is a Qt-based GUI application for the Jetson nano that acquires images from
 
 ## 動作、ビルド環境の構築
 
-QtとSpinnaker SDKをインストールし、```qmake``` とC++コンパイラのパスが通っている状態にしてください。C++コンパイラのインストール手順はQtのインストール手順に含まれます。
+QtとSpinnaker SDKをインストールし、```qmake``` とC++コンパイラ, ```nvcc``` のパスが通っている状態にしてください。C++コンパイラのインストール手順はQtのインストール手順に含まれます。
 
 ## リポジトリのクローン Clone this repository
 
@@ -23,6 +23,7 @@ git clone https://github.com/dainakai/jetsonCamApp.git
 ```
 cd path/to/jetsonCamApp
 sh ./Allclean.sh
+sh ./CUDAbuild.sh
 qmake
 make
 ```

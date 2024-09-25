@@ -1,246 +1,5 @@
-# JetsonCamApp
+// 20240923 Mutex導入前。
 
-## Directory Structure
-
-- JetsonCamApp/
-  - moc/
-  - .vscode/
-  - obj/
-  - build.pro
-  - src/
-    - main.cpp
-    - cuda_functions.h
-    - camerahandler.h
-    - cuda_functions.cu
-    - appwindow.h
-  - jetsonCamApp (binary file)
-
-## File Contents
-
-### build.pro
-
-```
-TEMPLATE = app
-TARGET = jetsonCamApp
-QT += widgets concurrent charts
-OBJECTS_DIR = obj
-MOC_DIR = moc
-SOURCES += src/main.cpp
-HEADERS += src/appwindow.h src/camerahandler.h
-CUDA_DIR = /usr/local/cuda
-INCLUDEPATH += $$CUDA_DIR/include
-CONFIG += c++17
-
-# Linux用の設定
-unix:!macx {
-    # 64ビットx86アーキテクチャの場合
-    contains(QT_ARCH, "x86_64") {
-        message("Configuring for x86_64 Linux")
-        INCLUDEPATH += /opt/spinnaker/include/
-        LIBS += -L/opt/spinnaker/lib -lSpinnaker -L./obj -lcuda_functions -L$$CUDA_DIR/lib64 -lcudart
-    }
-
-    # 64ビットARMアーキテクチャの場合
-    contains(QT_ARCH, "arm64") {
-        message("Configuring for arm64 Linux")
-        INCLUDEPATH += /opt/spinnaker/include/
-        LIBS += -L/opt/spinnaker/lib -lSpinnaker -L./obj -lcuda_functions -L$$CUDA_DIR/lib64 -lcudart
-    }
-}
-
-# Windows用の設定
-win32 {
-    # Windows特有の設定
-}
-
-```
-
-### src/main.cpp
-
-```
-#include "appwindow.h"
-#include "camerahandler.h"
-#include <QApplication>
-#include <QMessageBox>
-
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-
-    try {
-        CameraHandler cameraHandler;
-        AppWindow window(cameraHandler);
-        window.show();
-        return app.exec();
-    } catch (const std::runtime_error& e) {
-        QMessageBox::critical(nullptr, "Error", e.what());
-        return 1;
-    } catch (const Spinnaker::Exception& e) {
-        QMessageBox::critical(nullptr, "Error", e.what());
-        return 1;
-    } catch (...) {
-        QMessageBox::critical(nullptr, "Error", "Unknown error.");
-        return 1;
-    }
-}
-```
-
-### src/cuda_functions.h
-
-```
-#pragma once
-#include <tuple>
-#include <stdint.h>
-
-extern "C" std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size);
-```
-
-### src/camerahandler.h
-
-```
-#ifndef CAMERAHANDLER_H
-#define CAMERAHANDLER_H
-
-#include "Spinnaker.h"
-#include <QImage>
-
-class CameraHandler {
-public:
-    CameraHandler() {
-        system = Spinnaker::System::GetInstance();
-        camList = system->GetCameras();
-        if (camList.GetSize() == 0) {
-            camList.Clear();
-            system->ReleaseInstance();
-            throw std::runtime_error("No cameras found.");
-        }
-        pCam = camList.GetByIndex(0);
-        pCam->Init();
-        pCam->BeginAcquisition();
-        pCam->EndAcquisition();
-        pCam->BeginAcquisition();
-    }
-
-    ~CameraHandler() {
-        pCam->EndAcquisition();
-        pCam = nullptr;
-        camList.Clear();
-        system->ReleaseInstance();
-    }
-
-    QImage captureImage() {
-        Spinnaker::ImagePtr pResultImage = pCam->GetNextImage();
-        const size_t width = pResultImage->GetWidth();
-        const size_t height = pResultImage->GetHeight();
-        const size_t stride = pResultImage->GetStride();
-        Spinnaker::PixelFormatEnums pixelFormat = pResultImage->GetPixelFormat();
-        const unsigned char *imageData = static_cast<const unsigned char*>(pResultImage->GetData());
-
-        QImage image;
-        if (pixelFormat == Spinnaker::PixelFormat_Mono8)
-        {
-            image = QImage(imageData, width, height, stride, QImage::Format_Grayscale8);
-            return image;
-        }
-        else if (pixelFormat == Spinnaker::PixelFormat_RGB8)
-        {
-            image = QImage(imageData, width, height, stride, QImage::Format_RGB888);
-            return image;
-        }else
-        {
-            image = QImage(width, height, QImage::Format_RGB888);
-            return image;
-        }
-    }
-
-    double getFrameRate() {
-        return pCam->AcquisitionFrameRate.GetValue();
-    }
-
-    int getWidth() {
-        return pCam->Width.GetValue();
-    }
-
-    int getHeight() {
-        return pCam->Height.GetValue();
-    }
-
-    void saveImage(const QImage& image, const QString& directory, int imageCount) {
-        QString filename = QString("%1/%2.bmp").arg(directory).arg(imageCount, 6, 10, QLatin1Char('0'));
-        image.save(filename);
-    }
-
-    void stopAcquisition() {
-        pCam->EndAcquisition();
-    }
-
-    void startAcquisition() {
-        pCam->BeginAcquisition();
-    }
-
-private:
-    Spinnaker::SystemPtr system;
-    Spinnaker::CameraList camList;
-    Spinnaker::CameraPtr pCam;
-};
-
-#endif // CAMERAHANDLER_H
-```
-
-### src/cuda_functions.cu
-
-```
-#include <thrust/device_vector.h>
-#include <thrust/host_vector.h>
-#include <thrust/universal_vector.h>
-#include <thrust/reduce.h>
-#include <thrust/functional.h>
-#include <thrust/transform_reduce.h>
-#include <tuple>
-
-#ifdef __x86_64__
-extern "C" std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size) {
-    thrust::device_vector<uint8_t> d_data(size);
-    thrust::copy(data, data + size, d_data.begin());
-
-    float mean = static_cast<float>(thrust::reduce(d_data.begin(), d_data.end(), 0, thrust::plus<int>())) / size;
-
-    thrust::device_vector<float> d_diff(size);
-    thrust::transform(d_data.begin(), d_data.end(), d_diff.begin(),
-                      [mean] __device__ (uint8_t val) { return (static_cast<float>(val) - mean) * (static_cast<float>(val) - mean); });
-
-    float variance = thrust::reduce(d_diff.begin(), d_diff.end(), 0.0f, thrust::plus<float>()) / size;
-    float stdDev = sqrtf(variance);
-
-    float k = stdDev / mean;
-
-    return std::make_tuple(mean, stdDev, k);
-}
-#elif __aarch64__
-extern "C" std::tuple<float, float, float> calculateMeanStdDevK(uint8_t* data, int size) {
-    thrust::universal_vector<uint8_t> d_data(size);
-    thrust::copy(data, data + size, d_data.begin());
-
-    float mean = static_cast<float>(thrust::reduce(d_data.begin(), d_data.end(), 0, thrust::plus<int>())) / size;
-
-    thrust::device_vector<float> d_diff(size);
-    thrust::transform(d_data.begin(), d_data.end(), d_diff.begin(),
-                      [mean] __device__ (uint8_t val) { return (static_cast<float>(val) - mean) * (static_cast<float>(val) - mean); });
-
-    float variance = thrust::reduce(d_diff.begin(), d_diff.end(), 0.0f, thrust::plus<float>()) / size;
-    float stdDev = sqrtf(variance);
-
-    float k = stdDev / mean;
-
-    return std::make_tuple(mean, stdDev, k);
-}
-#else
-#error "Unsupported architecture"
-#endif
-```
-
-### src/appwindow.h
-
-```
 #ifndef APPWINDOW_H
 #define APPWINDOW_H
 
@@ -272,14 +31,14 @@ class AppWindow : public QWidget {
 public:
     AppWindow(CameraHandler& cameraHandler, QWidget *parent = nullptr)
     : QWidget(parent), cameraHandler(cameraHandler) {
+        QThreadPool::globalInstance()->setMaxThreadCount(4);
         setupUI();
         startCamera();
     }
 
     ~AppWindow() {
         QThreadPool::globalInstance()->waitForDone();
-        delete[] imageData;
-        saveGraphData();
+        saveGraphData(frameCountData, meanData, stddevData, kData, timestampData);
     }
 
 private slots:
@@ -301,7 +60,7 @@ private slots:
 
         try
         {
-            timer->start(1000 / cameraHandler.getFrameRate());
+            startCamera();
             cameraHandler.startAcquisition();
         }
         catch(const std::exception& e)
@@ -328,7 +87,7 @@ private slots:
 
         try
         {
-            timer->start(1000 / cameraHandler.getFrameRate());
+            startCamera();
             cameraHandler.startAcquisition();
         }
         catch(const std::exception& e)
@@ -354,20 +113,24 @@ private slots:
     }
 
     void updateImage() {
-        QImage image = cameraHandler.captureImage();
         auto now = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastUpdateTime).count();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now - lastUpdateTime).count();
+
+        QImage image;
+        double timestamp;
+        double temp;
+        std::tie(image, timestamp, temp) = cameraHandler.captureImage();
+
         lastUpdateTime = now;
-        double fps = 1000.0 / elapsed;
-        fpsLabel -> setText(QString("FPS: %1").arg(fps, 0, 'f', 2));
+        double fps = 1000000.0 / elapsed;
+        fpsLabel -> setText(QString("FPS: %3").arg(fps, 0, 'f', 2));
+        timestampLabel -> setText(QString("Timestamp: %1").arg(timestamp, 0, 'f', 2));
+        tempLabel -> setText(QString("Temperature: %1").arg(temp, 0, 'f', 2));
+        // std::cout << "Timestamp: " << timestamp << ",\tTemperature: " << temp << std::endl;
         if (!image.isNull()) {
             imageView->setPixmap(QPixmap::fromImage(image));
-            if (recording) {
-                QtConcurrent::run(&cameraHandler, &CameraHandler::saveImage, image, pathLineEdit->text(), frameCount);
-            }
-
-            QtConcurrent::run(this, &AppWindow::UpdateGraph, image, frameCount);
-
+            QtConcurrent::run(this, &AppWindow::resultProcessing, std::move(image), frameCount, timestamp, pathLineEdit->text(), recording);
+            QCoreApplication::processEvents();
             frameCount++;
         }
     }
@@ -380,6 +143,8 @@ private:
     CameraHandler& cameraHandler;
     QTimer *timer;
     QLabel *fpsLabel;
+    QLabel *timestampLabel;
+    QLabel *tempLabel;
     std::chrono::high_resolution_clock::time_point lastUpdateTime = std::chrono::high_resolution_clock::now();
     uint8_t* imageData;
     QChartView *chartView;
@@ -392,6 +157,7 @@ private:
     std::vector<float> meanData;
     std::vector<float> stddevData;
     std::vector<float> kData;
+    std::vector<double> timestampData;
 
     QChartView *trendChartView;
     QLineSeries *trendMeanSeries;
@@ -399,14 +165,13 @@ private:
     QLineSeries *trendKSeries;
     QValueAxis *trendAxisX;
     QValueAxis *trendAxisY;
-    // std::vector<float> trendMeanData;
-    // std::vector<float> trendStddevData;
-    // std::vector<float> trendKData;
     float trendMean = 0;
     float trendStddev = 0;
     float trendK = 0;
 
     const int trendInterval = 30;
+    const int saveImageInterval = 600;
+    const int saveGraphInterval = 6000;
 
     int Width = cameraHandler.getWidth();
     int Height = cameraHandler.getHeight();
@@ -449,6 +214,14 @@ private:
         fpsLabel = new QLabel(this);
         fpsLabel -> setAlignment(Qt::AlignCenter);
         mainLayout -> addWidget(fpsLabel);
+
+        timestampLabel = new QLabel(this);
+        timestampLabel -> setAlignment(Qt::AlignCenter);
+        mainLayout -> addWidget(timestampLabel);
+
+        tempLabel = new QLabel(this);
+        tempLabel -> setAlignment(Qt::AlignCenter);
+        mainLayout -> addWidget(tempLabel);
 
         imageData = new uint8_t[Width * Height];
 
@@ -537,10 +310,10 @@ private:
     void startCamera() {
         double frameRate = cameraHandler.getFrameRate();
         int interval = static_cast<int>(1000.0 / frameRate); // フレームレートをミリ秒に変換
-        timer->start(interval);
+        timer->start(1);
     }
 
-    void UpdateGraph(QImage image, int frameNumber) {
+    void UpdateGraph(QImage image, int frameNumber, double timestamp) {
         const uint8_t* data = image.bits();
         auto [mean, stddev, kurtosis] = calculateMeanStdDevK(data, Width * Height);
         
@@ -565,6 +338,7 @@ private:
         meanData.push_back(mean/255.0);
         stddevData.push_back(stddev/255.0);
         kData.push_back(kurtosis);
+        timestampData.push_back(timestamp);
 
         if (frameNumber % trendInterval != 0) {
             trendMean += mean/255.0;
@@ -582,22 +356,59 @@ private:
         }
     }
 
-    void saveGraphData() {
-        QFile file(pathLineEditforGraph->text() + "/graph_data.csv");
-        if (!file.open(QIODevice::WriteOnly)) {
-            QMessageBox::critical(this, "Error", "Failed to save graph data.");
+    void saveGraphData(const std::vector<int> saveframeCountData, const  std::vector<float> savemeanData, const std::vector<float> savestddevData, const std::vector<float> savekData, const std::vector<double> savetimestampData) {
+        frameCountData.clear();
+        meanData.clear();
+        stddevData.clear();
+        kData.clear();
+        timestampData.clear();
+
+        QString filePath = pathLineEditforGraph->text() + "/graph_data.csv";
+        QFile file(filePath);
+        
+        bool fileExists = file.exists();
+        
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
+            QMessageBox::critical(this, "Error", "Failed to open graph data file for writing.");
             return;
         }
 
         QTextStream stream(&file);
-        stream << "Frame,Mean,StdDev,Kurtosis\n";
-        for (int i = 0; i < frameCountData.size(); i++) {
-            stream << frameCountData[i] << "," << meanData[i] << "," << stddevData[i] << "," << kData[i] << "\n";
+
+        // ファイルが新規作成された場合のみヘッダーを書き込む
+        if (!fileExists) {
+            stream << "Frame,TimeStamp,Mean,StdDev,Kurtosis\n";
         }
+
+        // 新しいデータを追記
+        for (size_t i = 0; i < saveframeCountData.size(); ++i) {
+            stream << saveframeCountData[i] << "," 
+                << savetimestampData[i] << ","
+                << savemeanData[i] << "," 
+                << savestddevData[i] << "," 
+                << savekData[i] << "\n";
+        }
+
         file.close();
+    }
+
+    void resultProcessing(QImage image, int frameNumber, double timestamp, const QString& directory, bool recording) {
+        try
+        {
+            UpdateGraph(image, frameNumber, timestamp);
+            if (recording && frameNumber % saveImageInterval == 0) {
+                cameraHandler.saveImage(std::move(image), directory, frameNumber);
+            }
+            if (recording && frameNumber % saveGraphInterval == 0) {
+                saveGraphData(frameCountData, meanData, stddevData, kData, timestampData);
+            }
+        }
+        catch(const std::exception& e)
+        {
+            QMessageBox::critical(this, "Error", e.what());
+            std::cerr << e.what() << std::endl;
+        }
     }
 };
 
 #endif // APPWINDOW_H
-```
-

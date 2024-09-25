@@ -1,3 +1,8 @@
 .vscode/
-data/
-core*
+.DS_Store
+.summaryignore
+generate_project_summary.py
+graph_data.csv
+backup/
+moc/
+obj/
