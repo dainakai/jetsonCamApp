@@ -5,8 +5,9 @@
 #include <thrust/functional.h>
 #include <thrust/transform_reduce.h>
 #include <tuple>
+#include <iostream>
 
-extern "C" int wrap_cudaSetDevice(int num) {
+int wrap_cudaSetDevice(int num) {
     cudaError_t cudaStatus = cudaSetDevice(num);
     if (cudaStatus != cudaSuccess) {
         std::cerr << "cudaSetDevice failed!" << std::endl;
@@ -17,7 +18,7 @@ extern "C" int wrap_cudaSetDevice(int num) {
 }
 
 #ifdef __x86_64__
-extern "C" std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size) {
+std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size) {
     thrust::device_vector<uint8_t> d_data(size);
     thrust::copy(data, data + size, d_data.begin());
 
@@ -36,7 +37,7 @@ extern "C" std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* d
 }
 
 #elif __aarch64__
-extern "C" std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size) {
+std::tuple<float, float, float> calculateMeanStdDevK(const uint8_t* data, int size) {
     thrust::universal_vector<uint8_t> d_data(size);
     thrust::copy(data, data + size, d_data.begin());
 

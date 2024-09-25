@@ -18,7 +18,9 @@ public:
         pCam = camList.GetByIndex(0);
         pCam->Init();
         pCam->BeginAcquisition();
-        inittimestamp = pCam->GetNextImage()->GetTimeStamp();
+        Spinnaker::ImagePtr pResultImage = pCam->GetNextImage();
+        inittimestamp = pResultImage->GetTimeStamp();
+        pResultImage->Release();
         pCam->EndAcquisition();
         pCam->BeginAcquisition();
     }

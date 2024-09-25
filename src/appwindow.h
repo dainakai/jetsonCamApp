@@ -33,6 +33,9 @@ public:
         : QWidget(parent), cameraHandler(cameraHandler) {
         QThreadPool::globalInstance()->setMaxThreadCount(4);
         setupUI();
+        if (!wrap_cudaSetDevice(0)) {
+            QMessageBox::critical(this, "Error", "Failed to set CUDA device.");
+        }
         startCamera();
 
         // シグナルとスロットの接続
@@ -46,7 +49,7 @@ public:
     }
 
 signals:
-    void graphDataReady(int frameNumber, double timestamp, double temp, float mean, float stddev, float kurtosis);
+    void graphDataReady(int frameNumber, double timestamp, double temp, float mean, float stddev, float cv);
 
 private slots:
     void onBrowseButtonClicked() {
@@ -117,8 +120,16 @@ private slots:
         std::tie(image, timestamp, temp) = cameraHandler.captureImage();
 
         lastUpdateTime = now;
-        double fps = 1000000.0 / elapsed;
-        fpsLabel->setText(QString("FPS: %1").arg(fps, 0, 'f', 2));
+        sumProcTime += elapsed;
+
+        if (frameCount % FrameRate == 0) {
+            currentProcTime = sumProcTime / FrameRate;
+            sumProcTime = 0.0;
+        }
+
+        double fps = 1000000.0 / currentProcTime;
+        fpsLabel->setText(QString("Processed FPS: %1\n").arg(fps, 0, 'f', 2) + QString("Camera FPS: %3").arg(1.0/(timestamp-latestCameraTimeStamp), 0, 'f', 2));
+        latestCameraTimeStamp = timestamp;
         timestampLabel->setText(QString("Timestamp: %1").arg(timestamp, 0, 'f', 2));
         tempLabel->setText(QString("Temperature: %1").arg(temp, 0, 'f', 2));
 
@@ -131,8 +142,8 @@ private slots:
         }
     }
 
-    void onGraphDataReady(int frameNumber, double timestamp, double temp, float mean, float stddev, float kurtosis) {
-        UpdateGraph(frameNumber, timestamp, temp, mean, stddev, kurtosis);
+    void onGraphDataReady(int frameNumber, double timestamp, double temp, float mean, float stddev, float cv) {
+        UpdateGraph(frameNumber, timestamp, temp, mean, stddev, cv);
     }
 
 private:
@@ -169,6 +180,9 @@ private:
     float trendMean = 0;
     float trendStddev = 0;
     float trendK = 0;
+    double latestCameraTimeStamp = 0.0;
+    double sumProcTime = 0.0;
+    double currentProcTime = 0.0;
 
     const int trendInterval = 30;
     const int saveImageInterval = 600;
@@ -176,6 +190,7 @@ private:
 
     int Width = cameraHandler.getWidth();
     int Height = cameraHandler.getHeight();
+    int FrameRate = cameraHandler.getFrameRate();
     int frameCount = 0;
 
     bool recording = false;
@@ -309,26 +324,26 @@ private:
     }
 
     void startCamera() {
-        double frameRate = cameraHandler.getFrameRate();
+        double frameRate = cameraHandler.getFrameRate()*1.5; // QTimerは処理が遅延したらその分後ろにズレてトリガーされるためなるだけはやくしておいてよい。
         int interval = static_cast<int>(1000.0 / frameRate); // フレームレートをミリ秒に変換
         timer->start(interval);
     }
 
-    void UpdateGraph(int frameNumber, double timestamp, double temp, float mean, float stddev, float kurtosis) {
+    void UpdateGraph(int frameNumber, double timestamp, double temp, float mean, float stddev, float cv) {
         QMutexLocker locker(&dataMutex);
 
         // データを更新
         frameCountData.push_back(frameNumber);
         meanData.push_back(mean / 255.0f);
         stddevData.push_back(stddev / 255.0f);
-        kData.push_back(kurtosis);
+        kData.push_back(cv);
         timestampData.push_back(timestamp);
         tempData.push_back(temp);
 
         // グラフを更新
         meanSeries->append(frameNumber, mean / 255.0f);
         stddevSeries->append(frameNumber, stddev / 255.0f);
-        kSeries->append(frameNumber, kurtosis);
+        kSeries->append(frameNumber, cv);
         axisX->setRange(frameNumber - 500, frameNumber);
         axisY->setRange(0, 1.0);
 
@@ -342,7 +357,7 @@ private:
         if (frameNumber % trendInterval != 0) {
             trendMean += mean / 255.0f;
             trendStddev += stddev / 255.0f;
-            trendK += kurtosis;
+            trendK += cv;
         } else {
             trendMeanSeries->append(frameNumber, trendMean / trendInterval);
             trendStddevSeries->append(frameNumber, trendStddev / trendInterval);
@@ -372,7 +387,7 @@ private:
 
         // 新規ファイルの場合はヘッダーを書き込む
         if (!fileExists) {
-            stream << "Frame,TimeStamp,Mean,StdDev,Kurtosis\n";
+            stream << "Frame,TimeStamp,Temperature,Mean,StdDev,CV\n";
         }
 
         // データを追記
@@ -398,23 +413,22 @@ private:
 
     void resultProcessing(QImage image, std::tuple<int, double, double>(tuple), const QString& directory, bool recording) {
         try {
-            wrap_cudaSetDevice(0);
             int frameNumber;
             double timestamp;
             double temp;
             std::tie(frameNumber, timestamp, temp) = tuple;
             const uint8_t* data = image.bits();
-            auto [mean, stddev, kurtosis] = calculateMeanStdDevK(data, Width * Height);
+            auto [mean, stddev, cv] = calculateMeanStdDevK(data, Width * Height);
 
-            if (!std::isfinite(mean) || !std::isfinite(stddev) || !std::isfinite(kurtosis)) {
+            if (!std::isfinite(mean) || !std::isfinite(stddev) || !std::isfinite(cv)) {
                 mean = 0.0f;
                 stddev = 0.0f;
-                kurtosis = 0.0f;
+                cv = 0.0f;
                 std::cerr << "Invalid value detected at frame " << frameNumber << std::endl;
             }
 
             // シグナルを発行してメインスレッドにデータを送信
-            emit graphDataReady(frameNumber, timestamp, temp, mean, stddev, kurtosis);
+            emit graphDataReady(frameNumber, timestamp, temp, mean, stddev, cv);
 
             // 画像の保存
             if (recording && frameNumber % saveImageInterval == 0) {
