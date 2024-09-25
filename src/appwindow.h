@@ -23,6 +23,13 @@
 #include <QMutexLocker>
 #include <QCoreApplication>
 
+#include <iostream>
+#include <chrono>
+#include <cmath>
+#include <iomanip>
+#include <tuple>
+#include <vector>
+
 using namespace QtCharts;
 
 class AppWindow : public QWidget {
@@ -390,6 +397,7 @@ private:
             stream << "Frame,TimeStamp,Temperature,Mean,StdDev,CV\n";
         }
 
+        stream.setRealNumberPrecision(15);
         // データを追記
         for (size_t i = 0; i < saveframeCountData.size(); ++i) {
             stream << saveframeCountData[i] << ","
@@ -436,7 +444,7 @@ private:
             }
 
             // グラフデータの保存
-            if (recording && frameNumber % saveGraphInterval == 0) {
+            if (!pathLineEditforGraph->text().isEmpty() && frameNumber % saveGraphInterval == 0) {
                 QMutexLocker locker(&dataMutex);
                 saveGraphData(frameCountData, meanData, stddevData, kData, timestampData, tempData);
             }
