@@ -1,8 +1,6 @@
 # JetsonCamApp
 
-FLIRカメラからSpinnnaker SDKを用いて画像取得し、所望の処理を経てデータを保存するJetson nano用QtベースのGUIアプリです。
-
-This is a Qt-based GUI application for the Jetson nano that acquires images from a FLIR camera using the Spinnaker SDK and stores the data after the desired processing.
+FLIRカメラからSpinnnaker SDKを用いて画像取得し、CUDAを用いた画像処理を経てデータを保存するJetson nano用QtベースのGUIアプリです。x86_64でも動作します。
 
 ## 動作、ビルド環境の構築
 
