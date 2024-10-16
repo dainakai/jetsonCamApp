@@ -2,7 +2,8 @@
 #define APPWINDOW_H
 
 #include "camerahandler.h"
-#include "cuda_functions.h"
+// #include "cuda_functions.h"
+#include "cpu_process.h"
 
 #include <QWidget>
 #include <QPushButton>
@@ -40,9 +41,9 @@ public:
         : QWidget(parent), cameraHandler(cameraHandler) {
         QThreadPool::globalInstance()->setMaxThreadCount(4);
         setupUI();
-        if (!wrap_cudaSetDevice(0)) {
-            QMessageBox::critical(this, "Error", "Failed to set CUDA device.");
-        }
+        // if (!wrap_cudaSetDevice(0)) {
+        //     QMessageBox::critical(this, "Error", "Failed to set CUDA device.");
+        // }
         startCamera();
 
         // シグナルとスロットの接続
@@ -360,21 +361,21 @@ private:
             kSeries->remove(0);
         }
 
-        // トレンドデータの更新
-        if (frameNumber % trendInterval != 0) {
-            trendMean += mean / 255.0f;
-            trendStddev += stddev / 255.0f;
-            trendK += cv;
-        } else {
-            trendMeanSeries->append(frameNumber, trendMean / trendInterval);
-            trendStddevSeries->append(frameNumber, trendStddev / trendInterval);
-            trendKSeries->append(frameNumber, trendK / trendInterval);
-            trendAxisX->setRange(0, frameNumber);
-            trendAxisY->setRange(0, 1.0);
-            trendMean = 0;
-            trendStddev = 0;
-            trendK = 0;
-        }
+        // // トレンドデータの更新
+        // if (frameNumber % trendInterval != 0) {
+        //     trendMean += mean / 255.0f;
+        //     trendStddev += stddev / 255.0f;
+        //     trendK += cv;
+        // } else {
+        //     trendMeanSeries->append(frameNumber, trendMean / trendInterval);
+        //     trendStddevSeries->append(frameNumber, trendStddev / trendInterval);
+        //     trendKSeries->append(frameNumber, trendK / trendInterval);
+        //     trendAxisX->setRange(0, frameNumber);
+        //     trendAxisY->setRange(0, 1.0);
+        //     trendMean = 0;
+        //     trendStddev = 0;
+        //     trendK = 0;
+        // }
     }
 
     void saveGraphData(const std::vector<int>& saveframeCountData, const std::vector<float>& savemeanData,
